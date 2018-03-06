@@ -193,6 +193,40 @@ Combination of these metrics, causes the results to be \textit{balanced}.
 
 \subsubsection*{$F_{\beta}$ Score}
 $F_{\beta}$ combines \textit{Precision} and \textit{Recall}. We'll talk about its advantages later in this assignment.
+\newpage
+
+\section{The Concept of Harmonic Mean and $F_{\beta}$ Score}
+What is $F_{\beta}$ score? Describe how the term $\beta$ affects the final score.
+\subsection*{Solution}
+We saw how the $F_1$ score is computed. Before getting into the details, let's recall something interesting; \textbf{Average}.
+The simplest form of average is what we describe as \textit{sum of all values divided by their count}. There is another average(\textit{mean}), which is called \textit{Harmonic mean}.\\
+ Harmonic mean is represented as:
+\begin{equation}
+	\frac{1}{H}	= \frac{1}{n}\sum_{i=1}^{n}\frac{1}{x_{i}}
+\end{equation}
+Lets find the harmonic mean for two scores; Precision and Recall. The equation (2.1) turns out to be:
+$$
+	\frac{1}{H}	= \frac{1}{2}\sum_{i=1}^{2}\frac{1}{x_{i}}
+$$	
+Replacing the terms, Recall and Precision:
+\begin{equation}
+H = \frac{1}{\frac{1}{2}(\frac{1}{Recall} + \frac{1}{Precision})} =  \frac{2*Recall*Precision}{Recall + Precision}
+\end{equation}
+Generalizing this idea, we can multiply $H$ by both sides of (2.1):
+$$
+\frac{1}{n}\sum_{i=1}^{n}\frac{H}{x_i} = 1
+$$
+In other words, the average of ratios between the harmonic mean and the data points is unity.
+We call $H$ the $F_{1}$ score. The important thing is that the effect of each score on the $H$ is considered the same here($\frac{1}{2}$). We call this effectiveness as the \textit{weight} of each score in forming the $F_{1}$ score. The summation of weights has to remain 1. Considering the the weight of $\frac{1}{\beta + 1}$ as the weight for the \textit{Precision}, we'll have $\frac{\beta}{\beta + 1}$ as the weight for the \textit{Recall}. Because we can get
+
+$$
+	\frac{\beta}{\beta + 1} + \frac{1}{\beta + 1} = \frac{\beta + 1}{\beta + 1} = 1
+$$
+Rewriting the equation (2.2) by changing the weights of its parameters:
+\begin{equation}
+	F_{\beta} = \frac{1}{\frac{\beta}{\beta + 1}\frac{1}{Recall} + \frac{1}{\beta + 1}\frac{1}{Precision}} = \frac{(\beta + 1) * Recall * Precision}{Recall + \beta*Precision}
+\end{equation}
+\subsubsection*{The Effect of $\beta$}
 
 \section{The Concept of Normalization}
 Describe the term \textit{Normalization} in data engineering. What do we mean by \textit{Normalizing} the data?
