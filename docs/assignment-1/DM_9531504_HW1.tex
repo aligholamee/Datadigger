@@ -182,4 +182,26 @@ No, its not possible! Even using 2 humans to classify some data, \textit{they mi
 \subsubsection*{Accuracy Paradox}
 Accuracy is the proportion of the correct results that a classifier achieved. Assume a classifier who classifies its inputs as \textit{true} always. The denominator for the \textit{Accuracy} formula is the size of the dataset, which is a constant. The numerator while, contains $TP + TN$. This classifier predicts a great number of \textit{TP} and a small number of \textit{TN}. If the assumption changes to be that classification always turns out to be \textit{false}, we'll get a huge value for \textit{TN} and a small value for \textit{TP}. The addition is the same by the way. Thus the accuracy of a \textit{dummy} model can be amazing in both criteria. Thus, \textit{Accuracy} is not a reliable metric in machine learning problems. We call this \textit{Accuracy Paradox}. 
 
+\subsubsection*{Recall}
+This metric describes that, out of all the positive examples there were, what fraction did the classifier pick up?
+
+\subsubsection*{Precision}
+This metric states that, out of all the examples the classifier labeled as positive, what fraction were correct?
+
+\subsubsection*{Combination of Recall \& Precision}
+Combination of these metrics, causes the results to be \textit{balanced}.
+
+\subsubsection*{$F_{\beta}$ Score}
+$F_{\beta}$ combines \textit{Precision} and \textit{Recall}. We'll talk about its advantages later in this assignment.
+
+\section{The Concept of Normalization}
+Describe the term \textit{Normalization} in data engineering. What do we mean by \textit{Normalizing} the data?
+\subsection*{Solution}
+As the word implies, \textit{Normalization} is the process of adjusting values into alignment. The \textit{transformation} of values in order to represent them in a uniform range, is also called \textit{Normalization}. This topic can have different meaning in different applications.
+\subsubsection*{Normalization of Inputs in Neural Networks}
+The inputs must have same range of values, otherwise we'll be left with an \textit{ill-conditioned} model after the training.
+
+\subsubsection*{Convergence of Weights \& Biases in Distance Based Classifiers}
+While using \textit{Distance Based} classifiers, it is important not to get conditioned by features with wider range of possible values. \textit{Normalization} is used to guarantee the \textit{Convergence} of \textit{Weights and Biases} in such conditions. We often call this, the \textit{Convergence of Gradient Descent}, since the gradient descent is used most of the times to optimize the loss.
+
 \end{document}
