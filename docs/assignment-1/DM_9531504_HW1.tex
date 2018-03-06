@@ -1,0 +1,185 @@
+\documentclass[12pt]{article}
+\usepackage{latexsym,amssymb,amsmath} % for \Box, \mathbb, split, etc.
+% \usepackage[]{showkeys} % shows label names
+\usepackage{cite} % sorts citation numbers appropriately
+\usepackage{path}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage[pdftex]{graphicx}
+\usepackage{array}
+\usepackage{multirow}
+
+% horizontal margins: 1.0 + 6.5 + 1.0 = 8.5
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\textwidth}{6.5in}
+% vertical margins: 1.0 + 9.0 + 1.0 = 11.0
+\setlength{\topmargin}{0.0in}
+\setlength{\headheight}{12pt}
+\setlength{\headsep}{13pt}
+\setlength{\textheight}{625pt}
+\setlength{\footskip}{24pt}
+
+\renewcommand{\textfraction}{0.10}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\floatpagefraction}{0.90}
+
+\makeatletter
+\setlength{\arraycolsep}{2\p@} % make spaces around "=" in eqnarray smaller
+\makeatother
+
+% change equation, table, figure numbers to be counted inside a section:
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+
+% begin of personal macros
+\newcommand{\half}{{\textstyle \frac{1}{2}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\myth}{\vartheta}
+\newcommand{\myphi}{\varphi}
+
+\newcommand{\IN}{\mathbb{N}}
+\newcommand{\IZ}{\mathbb{Z}}
+\newcommand{\IQ}{\mathbb{Q}}
+\newcommand{\IR}{\mathbb{R}}
+\newcommand{\IC}{\mathbb{C}}
+\newcommand{\Real}[1]{\mathrm{Re}\left({#1}\right)}
+\newcommand{\Imag}[1]{\mathrm{Im}\left({#1}\right)}
+
+\newcommand{\norm}[2]{\|{#1}\|_{{}_{#2}}}
+\newcommand{\abs}[1]{\left|{#1}\right|}
+\newcommand{\ip}[2]{\left\langle {#1}, {#2} \right\rangle}
+\newcommand{\der}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dder}[2]{\frac{\partial^2 {#1}}{\partial {#2}^2}}
+\usepackage{enumitem}
+\newcommand{\nn}{\mathbf{n}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\uu}{\mathbf{u}}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{positioning}
+\usepackage{titlesec}
+\newcommand{\junk}[1]{{}}
+\usepackage{sectsty}
+\usepackage{xcolor}
+
+\newcommand\MyBox[2]{
+	\fbox{\lower0.75cm
+		\vbox to 1.7cm{\vfil
+			\hbox to 1.7cm{\hfil\parbox{1.4cm}{#1\\#2}\hfil}
+			\vfil}%
+	}%
+}
+
+\makeatletter
+\renewcommand*\env@matrix[1][\arraystretch]{%
+	\edef\arraystretch{#1}%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{*\c@MaxMatrixCols c}}
+\makeatother
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+\definecolor{darkblue}{rgb}{0,0,0.4}
+\usepackage[colorlinks = true,
+linkcolor = darkblue,
+urlcolor  = darkblue,
+citecolor = darkblue,
+anchorcolor = darkblue]{hyperref}
+% set two lengths for the includegraphics commands used to import the plots:
+\newlength{\fwtwo} \setlength{\fwtwo}{0.45\textwidth}
+% end of personal macros
+
+\begin{document}
+\DeclareGraphicsExtensions{.jpg}
+
+\begin{center}
+\textsc{\Large Data Mining} \\[2pt]
+	\textsc{\large Assignment 1}\\
+	\vspace{0.5cm}
+  Ali Gholami \\[6pt]
+  Department of Computer Engineering \& Information Technology\\
+  Amirkabir University of Technology  \\[6pt]
+  \def\UrlFont{\em}
+  \url{http://ceit.aut.ac.ir/~aligholamee}\\
+    \href{mailto:aligholamee@aut.ac.ir}{\textit{aligholamee@aut.ac.ir}}
+\end{center}
+
+\begin{abstract}
+In this assignment, several paramount concepts of \textit{Data Analysis} will be explained. we'll discuss the importance of metrics in the first theoretical problem. A quick review on the \textit{Apriori} algorithm for the \textit{Association Rule Mining} will be explained also. We'll also show how \textit{Weka} can be used for \textit{Association Rule Mining}. Furthermore, The effectiveness of \textit{Normalization} concept is proposed. Finally, an \textit{Statistical} point of view will help us to demonstrate and rationalize the relationship between the \textit{Performance} of the \textit{Learning Algorithm} and the amount of \textit{Data} available. A chief section of this assignment is dedicated to solve the \textit{Titanic} problem, which is a great practice of data mining concepts in production. We'll use \textit{Python} programming language and three main libraries; \textit{Scikit-Learn}, \textit{Pandas} and \textit{Numpy} to tackle this problem.
+\end{abstract} 
+
+\subparagraph{Keywords.} \textit{Apriori, Association Rule Mining, Normalization, Generalization, Preprocessing, Feature Engineering, Scikit-Learn, Pandas, Numpy, Python 3.5.}
+
+\section{Performance Metrics Analysis}
+Given the following \textit{Confusion Matrix} for a prediction about cancer.
+
+\def\arraystretch{1.5}
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{l|l|c|c|c}
+		\multicolumn{2}{c}{}&\multicolumn{2}{c}{Predicted Class}&\\
+		\cline{3-4}
+		\multicolumn{2}{c|}{}&Cancer = Yes&Cancer = No&\multicolumn{1}{c}{Total}\\
+		\cline{2-4}
+		\multirow{2}{*}{Actual Class\ \ }& Cancer = Yes & $60$ & $290$ & $350$\\
+		\cline{2-4}
+		& Cancer = No & $150$ & $9500$ & $9650$\\
+		\cline{2-4}
+		\multicolumn{1}{c}{} & \multicolumn{1}{c}{Total} & \multicolumn{1}{c}{$210$} & \multicolumn{    1}{c}{$9790$} & \multicolumn{1}{c}{$10000$}\\
+	\end{tabular}
+	\caption{Confusion matrix of cancer prediction.}
+\end{table} 
+Compute each of these performance metrics.
+\begin{enumerate}[label=(\alph*)]
+	\item Accuracy
+	\item Sensitivity
+	\item Precision
+	\item Specificity
+	\item F-measure
+\end{enumerate}
+
+\section*{Solution}
+Before getting into the computations, we'll review the \textit{nicknames} and \textit{formulas} to calculate each of these metrics. We have computed each of these metrics in front of them.\\
+\begin{equation}
+	Accuracy = \frac{TP + TN}{TP + TN + FN + FP} = \frac{60 + 9500}{60 + 9500 + 290 + 150} = 0.956
+\end{equation}
+\\
+\begin{equation}
+	TPR = Recall = Sensitivity = \frac{TP}{P} = \frac{TP}{TP + FN} = \frac{60}{60 + 290} = 0.171
+\end{equation}
+\\
+\begin{equation}
+	PPV = Precision = \frac{TP}{TP + FP} = \frac{60}{60+150} = 0.285
+\end{equation}
+\\
+\begin{equation}
+	TNR = Specificity = \frac{TN}{N} = \frac{TN}{TN + FP} = \frac{9500}{9500+150} = 0.984
+\end{equation}
+\\
+\begin{equation}
+	F-measure = \frac{2*TP}{2*TP + FP + FN} = \frac{2*60}{2*60 + 150 + 290} = 0.214
+\end{equation}
+Our mission is done! Nevertheless, we continue the explanation for almost each of these metrics. We'll discuss why \textit{Accuracy} itself would be a bad metric in most of the challenging cases.
+\subsubsection*{Why Performance Metrics Are Important}
+Metrics are important because they allow us to judge about models ability in prediction task. Without metrics we won't be able to compare models; Thus we won't be able to improve each.
+\subsubsection*{What Kind of Performance Metrics Are Useful}
+Not all of metrics describe this ability correctly in different conditions. Generally speaking, we need and \textit{Objective} metric. A metric could exhibit a great number for a classifier that classifies data as \textit{True} always. This can happen is \textit{Imbalanced Datasets}. The important thing is that, we need to establish a \textit{Baseline} before getting into these numbers. We need to measure the performance for a simple system before start tuning these numbers up.
+The absolute maximum performance that a machine learning system can achieve, is called \textit{Ceiling}. The performance we get with respect to the numbers(\textit{like numbers calculated above}), is bound between \textit{Baseline} and \textit{Ceiling} values.
+\begin{equation}
+	Baseline < Performance < Ceiling
+\end{equation}
+\subsubsection*{Possibility of Getting Complete Performance}
+No, its not possible! Even using 2 humans to classify some data, \textit{they might not agree 100\% of the times}.
+
+\subsubsection*{Accuracy Paradox}
+Accuracy is the proportion of the correct results that a classifier achieved. Assume a classifier who classifies its inputs as \textit{true} always. The denominator for the \textit{Accuracy} formula is the size of the dataset, which is a constant. The numerator while, contains $TP + TN$. This classifier predicts a great number of \textit{TP} and a small number of \textit{TN}. If the assumption changes to be that classification always turns out to be \textit{false}, we'll get a huge value for \textit{TN} and a small value for \textit{TP}. The addition is the same by the way. Thus the accuracy of a \textit{dummy} model can be amazing in both criteria. Thus, \textit{Accuracy} is not a reliable metric in machine learning problems. We call this as \textit{Accuracy Paradox}. 
+
+\end{document}
