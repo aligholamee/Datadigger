@@ -146,7 +146,7 @@ Compute each of these performance metrics.
 	\item F-measure
 \end{enumerate}
 
-\section*{Solution}
+\subsection*{Solution}
 Before getting into the computations, we'll review the \textit{nicknames} and \textit{formulas} to calculate each of these metrics. We have computed each of these metrics in front of them.\\
 \begin{equation}
 	Accuracy = \frac{TP + TN}{TP + TN + FN + FP} = \frac{60 + 9500}{60 + 9500 + 290 + 150} = 0.956
@@ -195,6 +195,157 @@ Combination of these metrics, causes the results to be \textit{balanced}.
 $F_{\beta}$ combines \textit{Precision} and \textit{Recall}. We'll talk about its advantages later in this assignment.
 \newpage
 
+% Here is the association rule mining section
+\section{The Association Rule Mining}
+Following are four random transactions. What association rules can be found using Apriori algoirhtm?
+\begin{itemize}
+	\item Minimum Support: 60\%
+	\item Minimum Confidence: 80\%
+\end{itemize}
+\begin{table}[!h] \centering
+	\begin{tabular}{rcccc}
+		\hline
+		$ Trans\_ID $ &
+		$ Item\_List $ \\
+		\hline
+		 T1\ \ \ \ \ & {K, A, D, B} \\
+		 T2\ \ \ \ \ & {D, A, C, B, E} \\
+		 T3\ \ \ \ \  & {C, A, B, E} \\
+		 T4\ \ \ \ \ & {B, A, D} \\
+		\hline
+	\end{tabular}
+	\caption{Demonstration of Database Transactions to Mine Rules From.}
+	\label{tabconvdemo}
+\end{table}
+
+\subsection*{Solution}
+Before getting into the details of the \textit{Apriori} algorithm, it worths mentioning that the \textit{Minimum Support} is used to find the appropriate \textit{itemset} and the \textit{Minimum Confidence} will be used to find the final \textit{rules}. Firstly, we need to find all items with size 1 and their frequencies.
+\begin{table}[!h] \centering
+	\begin{tabular}{rcccc}
+		\hline
+		$ Itemset $ &
+		$ Frequency $ &
+		$ Support $\\
+		\hline
+		 \{A\}\ \ \ \ & 4 & 100\%\\ 
+		 \{B\}\ \ \ \ & 4 & 100\%\\
+		 \{C\}\ \ \ \  & 2 & 50\%\\
+		 \{D\}\ \ \ \ & 3 & 75\%\\
+		 \{E\}\ \ \ \ & 2 & 50\%\\
+		 \{K\}\ \ \ \ & 1 & 25\%\\
+		\hline
+	\end{tabular}
+	\caption{Unity sized itemsets and their corresponding frequencies and support.}
+	\label{tabconvdemo}
+\end{table}
+Note that in each of these sections, the value of \textit{Support} for an itemset \textit{X} can be computed using the following formula:
+\begin{equation}
+	Support(X) = \frac{|\{t \epsilon T;\ X 	\subseteq t\}|}{|T|}
+\end{equation}
+We'll continue computing the itemsets with size 2. Note that the unity sized itemsets with support less than 60\% won't be considered in this algorithm. Thus we get:
+\begin{table}[!h] \centering
+	\begin{tabular}{rcccc}
+		\hline
+		$ Itemset $ &
+		$ Frequency $ &
+		$ Support $\\
+		\hline
+		 \{AB\}\ \ \ & 4 & 100\%\\ 
+		 \{AD\}\ \ \ & 3 & 75\%\\
+		 \{BD\}\ \ \  & 3 & 75\%\\
+		\hline
+	\end{tabular}
+	\caption{Itemsets of size 2 and their support.}
+	\label{tabconvdemo}
+\end{table}
+Finally, we reach the moment that there is only 1 terminal left. The following itemset with size 3 will be the stopping point of this algorithm.
+\begin{table}[!h] \centering
+	\begin{tabular}{rcccc}
+		\hline
+		$ Itemset $ &
+		$ Frequency $ &
+		$ Support $\\
+		\hline
+		 \{ABD\}\ \ & 3 & 75\%\\ 
+		\hline
+	\end{tabular}
+	\caption{Itemset of size 3 and its support.}
+	\label{tabconvdemo}
+\end{table}
+We can start deriving rules from the itemset in table 2.4. To obtain the association rules, we should derive all combinations of $X \Rightarrow Y$ in this itemset. Note that in this part, we use \textit{Confidence}, which tells how often the rule found to be true. \textit{Confidence} is defined as:
+\begin{equation}
+	Confidence(X \Rightarrow Y) = P(Y|X) = \frac{support\_count(A \cup B)}{support\_count(A)}
+\end{equation}
+Thus we'll have:
+\begin{itemize}
+	\item $\{A,\ B\} \rightarrow \{D\} = P(D\ |\ \{A,\ B\}) = \frac{3}{3} = 1$
+	\item $\{A,\ D\} \rightarrow \{B\} = P(B\ |\ \{A,\ D\}) = \frac{3}{3} = 1$
+	\item $\{B,\ D\} \rightarrow \{A\} = P(A\ |\ \{B,\ D\}) = \frac{3}{4} = 0.75$
+	\item $\{D\} \rightarrow \{A,\ B\} = P(\{A,\ B\ |\ \{D\}) = \frac{3}{3} = 1$
+	\item $\{B\} \rightarrow \{A,\ D\} = P(\{A, D\} |\ \{B\}) = \frac{3}{3} = 1$
+	\item $\{A,\ B\} \rightarrow \{D\} = P(D\ |\ \{A,\ B\}) = \frac{3}{3} = 1$
+\end{itemize}
+The rules with confidence above 0.8 are acceptable.
+\subsubsection*{Weka Tutorial on Association Rule Mining}
+In this section, we'll walk step by step to mine an association rule on an customized dataset.
+\begin{enumerate}
+	\item Go to the \textit{preprocess} tab. Hit the \textit{Open File} button.
+	\begin{figure}[!h] \centering
+		\includegraphics[width=0.5\textwidth]{openfile.png}
+		\caption{Open a random dataset.}
+		\label{figsolplot1}
+	\end{figure}
+	\item Edit the file by pressing the \textit{Edit} button.
+	\begin{figure}[!h] \centering
+		\includegraphics[width=0.5\textwidth]{edit_file.png}
+		\caption{Customize the opened dataset using edit file.}
+		\label{figsolplot2}
+	\end{figure}
+
+	\item Add your dataset with respect to its attributes and class values.
+	\begin{figure}[!h] \centering
+		\includegraphics[width=0.5\textwidth]{data.png}
+		\caption{Add samples in the database for association.}
+		\label{figsolplot3}
+	\end{figure}
+
+	\item Go to the associate tab by pressing the \textit{associate} button.
+	\begin{figure}[!h] \centering
+		\includegraphics[width=0.5\textwidth]{associate.png}
+		\caption{Open the association rules section.}
+		\label{figsolplot}
+	\end{figure}
+	
+	\item Choose the algorithm and its parameters.
+	\begin{figure} \centering
+		\includegraphics[width=0.5\textwidth]{select_associate_params.png}
+		\caption{Tune the parameters of the algorithm.}
+		\label{figsolplot}
+	\end{figure}
+
+	\item Set minimum support by filling the lower bound and upper bound support range.
+	\begin{figure} \centering
+		\includegraphics[width=0.5\textwidth]{set_min_support.png}
+		\caption{Set the support range.}
+		\label{figsolplot}
+	\end{figure}
+	
+	\item Set the minimum confidence using the confidence form.
+	\begin{figure} \centering
+		\includegraphics[width=0.5\textwidth]{set_confidence.png}
+		\caption{Set the minimum confidence.}
+		\label{figsolplot}
+	\end{figure}
+	
+	\item Run the algorithm. The following is the result after hitting the \textit{start} button.
+	\begin{figure} \centering
+		\includegraphics[width=0.6\textwidth]{associator_output.png}
+		\caption{Association results.}
+		\label{figsolplot}
+	\end{figure}
+\end{enumerate}
+
+\newpage
 \section{The Concept of Harmonic Mean and $F_{\beta}$ Score}
 What is $F_{\beta}$ score? Describe how the term $\beta$ affects the final score.
 \subsection*{Solution}
