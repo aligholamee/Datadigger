@@ -38,6 +38,49 @@
 \newcommand{\eps}{\varepsilon}
 \newcommand{\myth}{\vartheta}
 \newcommand{\myphi}{\varphi}
+\usepackage[utf8]{inputenc}
+
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+% Custom colors
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\usepackage{listings}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+		language=Python,
+		basicstyle=\ttm,
+		otherkeywords={self},             % Add keywords here
+		keywordstyle=\ttb\color{deepblue},
+		emph={MyClass,__init__},          % Custom highlighting
+		emphstyle=\ttb\color{deepred},    % Custom highlighting style
+		stringstyle=\color{deepgreen},
+		frame=tb,                         % Any extra options here
+		showstringspaces=false            % 
+}}
+
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+	\pythonstyle
+	\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+		\pythonstyle
+		\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
 
 \newcommand{\IN}{\mathbb{N}}
 \newcommand{\IZ}{\mathbb{Z}}
@@ -118,24 +161,25 @@ In this assignment, several paramount concepts of \textit{Data Analysis} will be
 
 \subparagraph{Keywords.} \textit{Apriori, Association Rule Mining, Normalization, Generalization, Preprocessing, Feature Engineering, Scikit-Learn, Pandas, Numpy, Python 3.5.}
 
-\section{Performance Metrics Analysis}
-Given the following \textit{Confusion Matrix} for a prediction about cancer.
-
-\def\arraystretch{1.5}
-\begin{table}[!h]
-	\centering
-	\begin{tabular}{l|l|c|c|c}
-		\multicolumn{2}{c}{}&\multicolumn{2}{c}{Predicted Class}&\\
-		\cline{3-4}
-		\multicolumn{2}{c|}{}&Cancer = Yes&Cancer = No&\multicolumn{1}{c}{Total}\\
-		\cline{2-4}
-		\multirow{2}{*}{Actual Class\ \ }& Cancer = Yes & $60$ & $290$ & $350$\\
-		\cline{2-4}
-		& Cancer = No & $150$ & $9500$ & $9650$\\
-		\cline{2-4}
-		\multicolumn{1}{c}{} & \multicolumn{1}{c}{Total} & \multicolumn{1}{c}{$210$} & \multicolumn{    1}{c}{$9790$} & \multicolumn{1}{c}{$10000$}\\
-	\end{tabular}
-	\caption{Confusion matrix of cancer prediction.}
-\end{table} 
+\section{Data Preprocessing}
+In this section, we'll be looking at our training data from different aspects. First, we need to get a quick intuition of how data looks like, how is that distributed and what to do with that! To do this, we'll be using some functions as described below.
+\begin{python}
+	separate_output('Training Data Types')
+	print(train_data.dtypes)
+\end{python}
+In this part, we have printed the data types of our training set. Note that \textit{separate-output} is a self-defined function to make thing more clear in the terminal.
+Now, its time for some statistics. To get a full understanding of how our numerical data is distributed, we use the following code.
+\begin{python}
+	separate_output('Statistical Information')
+	print(train_data.describe())
+\end{python}
+The result of this part of code will be some statistical parameters such as: \textit{variance, mean, max, min, counts}. These can be useful in the future to make decisions about \textit{data normalization}.
+Another amazing feature that \textit{Pandas} has provided for us is the ability to separately describe each column in the dataset. As an example, the first column contains $686$ missing values. Use the following code to believe this fact.
+\begin{python}
+	separate_output('Counts Values on a Column')
+	print(train_data['col_1'].value_counts())
+\end{python}
+This column may not be seem much useful at the first glance, but we keep it since there are some good values for that column which might make it useful while we go further in the classification task.
+Some of these columns are completely useless. Let's find them.
 
 \end{document}
