@@ -227,6 +227,27 @@ There is only one numeric feature which is column 8 that its missing values can 
 	train_data.col_8 = train_data.col_8.astype(float)
 	train_data['col_8'].fillna(train_data['col_8'].mean(), inplace=True)
 \end{python}
-The first line simply fixes the non-standard missing values given by dear T.A.s (just kidding bro :)). Then we change the type of column 8 to the float since \text{mean} function does not work for the \textit{int} types. Then we use the \textit{fillna} class member to fill the \textit{NaN} values with the average of that column.
-Now the time for converting the categorical data to numeric form has come. We use the following code snippet which \textit{pandas} has provided for us, to convert the categorical data to numeric form.
+The first line simply fixes the non-standard missing values given by dear T.A.s (just kidding bro :)). Then we change the type of column 8 to the float since \text{mean} function does not work for the \textit{int} types. Then we use the \textit{fillna} class member to fill the \textit{NaN} values with the average of that column.  Note that before continuing we shall extract the labels from our training data. We obtain this using the following code.
+\begin{python}
+	separate_output('Separated Training Labels')
+	train_labels = train_data['col_39']
+	train_data = train_data.drop(['col_39'], axis=1)
+	print(train_labels)
+\end{python}
+Now the time for converting the categorical data to numeric form has come. We use the following function to 1. Convert the object types to categorical types 2. Convert all categorical types to numeric format.
+\begin{python}
+	def obj_to_num(df):
+	
+	for column in df.columns:
+		if(df[column].dtype == 'object'):
+			df[column] = df[column].astype('category')
+			df[column] = df[column].cat.codes
+	
+	return df
+\end{python} 
+Now we perform a handy task called \textit{Standardization}. We can use either \textit{Standard Scaler} or \textit{Normalizer} to bring a unit \textit{L1} norm to the dataframe \textit{columns} or \textit{rows} respectively. In this case, we are going to use the \textit{Standard Scaler}.
+\begin{python}
+	train_data = StandardScaler().fit_transform(train_data)
+\end{python}
+This snippet will return a \textit{numpy} array of train data. Now we perform a \textit{Principal Component Analysis} to extract the best features depicting our dataset.
 \end{document}
