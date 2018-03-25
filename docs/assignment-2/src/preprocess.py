@@ -3,6 +3,7 @@ import pprint
 import pandas as pd
 from collections import deque
 from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
 # Define root data path
 DATA_ROOT = './data/'
@@ -117,3 +118,12 @@ print(train_data)
 separate_output('Standardized Train Data')
 train_data = StandardScaler().fit_transform(train_data)
 print(train_data.shape)
+
+
+# Dimensionalit Reduction with PCA
+pca = PCA(n_components=5)   # Since we have 5 classes
+pca.fit(train_data)         # fit pca on train data
+
+# Apply transformation on both test and train data
+train_data = pca.transform(train_data)
+test_data = pca.transform(test_data)
