@@ -1,8 +1,10 @@
 import numpy as np
 import pandas as pd
 
+# Define root data path
 DATA_ROOT = './data/'
 
+# Load data
 train_data = pd.read_csv(DATA_ROOT + 'train.csv')
 test_data = pd.read_csv(DATA_ROOT + 'test.csv')
 
@@ -14,3 +16,4 @@ train_data.columns = COLUMN_NAMES
 
 # Get datatypes
 print(train_data.dtypes)
+
