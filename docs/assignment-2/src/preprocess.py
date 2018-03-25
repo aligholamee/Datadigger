@@ -47,6 +47,19 @@ def compute_nans(df):
 
     return nans_dict
 
+# This function converts the object types to numeric types
+def obj_to_num(df):
+    '''
+        returns a new dataframe with all object types converted to numeric type
+    '''
+    
+    for column in df.columns:
+        if(df[column].dtype == 'object'):
+            df[column] = df[column].astype('category')
+            df[column] = df[column].cat.codes
+    
+    return df
+
 # Load data
 train_data = pd.read_csv(DATA_ROOT + 'train.csv')
 test_data = pd.read_csv(DATA_ROOT + 'test.csv')
@@ -89,6 +102,5 @@ print(train_data.dtypes)
 # Convert the categorical data to the numeric form
 # Select the columns with object type
 separate_output('Converted Data to Numeric Format')
-object_columns= train_data.select_dtypes(['object']).columns
-train_data[object_columns] = train_data[object_columns].apply(lambda x: x.obj.codes)
+train_data = obj_to_num(train_data)
 print(train_data)
