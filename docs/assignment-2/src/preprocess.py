@@ -78,11 +78,17 @@ pp.pprint(nan_cols)
 separate_output('Columns After Drop')
 cols_to_drop = [key for key, value in nan_cols.items() if value > 500]
 train_data = train_data.drop(cols_to_drop, axis=1)
-print(train_data.dtypes)
-print(train_data.shape)
 
 # Fill in the missing values of column 8 using its average
+separate_output('Data with Filled Missing Values in Float Dtypes')
 train_data = train_data.replace('?', np.NaN)            # Fix non standard missing values
 train_data.col_8 = train_data.col_8.astype(float)       # Mean does not work for int
 train_data['col_8'].fillna(train_data['col_8'].mean(), inplace=True)
+print(train_data.dtypes)
+
+# Convert the categorical data to the numeric form
+# Select the columns with object type
+separate_output('Converted Data to Numeric Format')
+object_columns= train_data.select_dtypes(['object']).columns
+train_data[object_columns] = train_data[object_columns].apply(lambda x: x.obj.codes)
 print(train_data)

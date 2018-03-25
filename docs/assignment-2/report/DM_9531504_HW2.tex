@@ -228,4 +228,5 @@ There is only one numeric feature which is column 8 that its missing values can 
 	train_data['col_8'].fillna(train_data['col_8'].mean(), inplace=True)
 \end{python}
 The first line simply fixes the non-standard missing values given by dear T.A.s (just kidding bro :)). Then we change the type of column 8 to the float since \text{mean} function does not work for the \textit{int} types. Then we use the \textit{fillna} class member to fill the \textit{NaN} values with the average of that column.
+Now the time for converting the categorical data to numeric form has come. We use the following code snippet which \textit{pandas} has provided for us, to convert the categorical data to numeric form.
 \end{document}
