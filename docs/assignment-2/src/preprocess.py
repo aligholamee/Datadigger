@@ -1,4 +1,5 @@
 import numpy as np
+import pprint 
 import pandas as pd
 
 # Define root data path
@@ -69,4 +70,6 @@ print(train_data['col_1'].value_counts())
 # Get the number of missing values in a descending order
 nan_sorted_cols = compute_nans_desc(train_data)
 separate_output('NaNs in Columns')
-print(nan_sorted_cols)
+pp = pprint.PrettyPrinter(indent=4)
+pp.pprint(nan_sorted_cols)
+
