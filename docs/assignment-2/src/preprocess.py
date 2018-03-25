@@ -30,9 +30,9 @@ def separate_output(str):
     print('\n')
 
 # This function computes the number of missing values of each column in descending order 
-def compute_nans_desc(df):
+def compute_nans(df):
     '''
-        returns a sorted dictionary consisting of column names and the number of NaNs in each column
+        returns a dictionary consisting of column names and the number of NaNs in each column
     '''
 
     nans_dict = {}
@@ -68,8 +68,8 @@ separate_output('Counts Values on a Column')
 print(train_data['col_1'].value_counts())
 
 # Get the number of missing values in a descending order
-nan_sorted_cols = compute_nans_desc(train_data)
+nan_cols = compute_nans(train_data)
 separate_output('NaNs in Columns')
 pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(nan_sorted_cols)
+pp.pprint(nan_cols)
 

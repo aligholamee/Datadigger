@@ -180,6 +180,22 @@ Another amazing feature that \textit{Pandas} has provided for us is the ability 
 	print(train_data['col_1'].value_counts())
 \end{python}
 This column may not be seem much useful at the first glance, but we keep it since there are some good values for that column which might make it useful while we go further in the classification task.
-Some of these columns are completely useless. Let's find them.
+Some of these columns are completely useless. Let's find them. The following function will return a dictionary consisting of number of missing values of each column.
+\begin{python}
+	def compute_nans(df):
+	
+	nans_dict = {}
+	
+	for col in df:
+		nan_col_counter = 0
+		for row in df[col]:
+			if(row == '?'):
+				nan_col_counter += 1
+		nans_dict[str(col)] = [nan_col_counter]
+	
+	return nans_dict
+\end{python}
+We can obviously remove the following columns with more than 500 missing values.
+
 
 \end{document}
