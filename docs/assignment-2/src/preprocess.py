@@ -1,6 +1,7 @@
 import numpy as np
 import pprint 
 import pandas as pd
+from collections import deque
 
 # Define root data path
 DATA_ROOT = './data/'
@@ -42,7 +43,7 @@ def compute_nans(df):
         for row in df[col]:
             if(row == '?'):
                 nan_col_counter += 1
-        nans_dict[str(col)] = [nan_col_counter]
+        nans_dict[str(col)] = nan_col_counter
 
     return nans_dict
 
@@ -73,3 +74,7 @@ separate_output('NaNs in Columns')
 pp = pprint.PrettyPrinter(indent=4)
 pp.pprint(nan_cols)
 
+# Drop the columns with more than 500 missing values
+separate_output('Columns to Drop')
+cols_to_drop = [key for key, value in nan_cols.items() if value > 500]
+print(cols_to_drop)
