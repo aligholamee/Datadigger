@@ -83,4 +83,6 @@ print(train_data.shape)
 
 # Fill in the missing values of column 8 using its average
 train_data = train_data.replace('?', np.NaN)            # Fix non standard missing values
-
+train_data.col_8 = train_data.col_8.astype(float)       # Mean does not work for int
+train_data['col_8'].fillna(train_data['col_8'].mean(), inplace=True)
+print(train_data)

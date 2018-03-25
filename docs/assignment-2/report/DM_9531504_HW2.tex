@@ -222,4 +222,10 @@ Here is the number of missing values for each column left in the training set.
 	}
 \end{python}
 There is only one numeric feature which is column 8 that its missing values can be filled using the mean of itself (column). To obtain this, we can use the following function to fill the missing values of an specific column.
+\begin{python}
+	train_data = train_data.replace('?', np.NaN)
+	train_data.col_8 = train_data.col_8.astype(float)
+	train_data['col_8'].fillna(train_data['col_8'].mean(), inplace=True)
+\end{python}
+The first line simply fixes the non-standard missing values given by dear T.A.s (just kidding bro :)). Then we change the type of column 8 to the float since \text{mean} function does not work for the \textit{int} types. Then we use the \textit{fillna} class member to fill the \textit{NaN} values with the average of that column.
 \end{document}
