@@ -41,8 +41,8 @@
 \usepackage[utf8]{inputenc}
 
 % Default fixed font does not support bold face
-\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
-\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{8} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{8}  % for normal
 
 % Custom colors
 \usepackage{color}
@@ -196,6 +196,30 @@ Some of these columns are completely useless. Let's find them. The following fun
 	return nans_dict
 \end{python}
 We can obviously remove the following columns with more than 500 missing values.
-
-
+\begin{python}
+	cols_to_drop = [key for key, value in nan_cols.items() if value > 500]
+	train_data = train_data.drop(cols_to_drop, axis=1)
+\end{python}
+Now its time to look for some \textit{correlation} between the features. We try to remove as much as correlated features as we can. There is a good reason for that. If two numerical features are perfectly correlated, then one doesn't add any additional information (it is determined by the other). So if the number of features is too high (relative to the training sample size), then it is beneficial to reduce the number of features. It's also important to mention that machine learning algorithms are very computationally intensive, and reducing the the features to independent components (or at least principal components) can greatly reduce the amount of resources required. Before implementing a dimensionality reduction approach on our data, let's make sure that the data is in the numeric form. But, before that, it is better to fill in the missing values with proper values.
+\newpage
+Here is the number of missing values for each column left in the training set.
+\begin{python}
+	{
+		'col_12': 217,
+		'col_2': 0,
+		'col_3': 70,
+		'col_32': 0,
+		'col_33': 0,
+		'col_34': 0,
+		'col_35': 0,
+		'col_37': 0,
+		'col_39': 0,
+		'col_4': 0,
+		'col_5': 0,
+		'col_7': 271,
+		'col_8': 282,
+		'col_9': 0
+	}
+\end{python}
+There is only one numeric feature which is column 8 that its missing values can be filled using the mean of itself (column). To obtain this, we can use the following function to fill the missing values of an specific column.
 \end{document}

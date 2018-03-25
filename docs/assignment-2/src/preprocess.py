@@ -47,6 +47,29 @@ def compute_nans(df):
 
     return nans_dict
 
+# Fills in the missing values using the average of the given column
+def fill_col_with_mean(df, col_index, specifier):
+    '''
+        returns a new dataframe in which its missing values in a given column with
+        a given specifier are filled with the average of that column
+    '''
+    sum = 0
+    count = 0
+    col_mean = 0
+
+    # Find the mean
+    for row_index, row_value in df.iterrows():
+        if(row_value[col_index] != '?'):
+            sum = sum + row_value
+            count += 1
+    col_mean = sum / count
+
+    for row_index, row_value in df.iterrows():
+        if(row_value[col_index] == '?'):
+            df[row_index][col_index] = col_mean
+
+    return df[col_index]
+
 # Load data
 train_data = pd.read_csv(DATA_ROOT + 'train.csv')
 test_data = pd.read_csv(DATA_ROOT + 'test.csv')
@@ -81,3 +104,7 @@ train_data = train_data.drop(cols_to_drop, axis=1)
 print(train_data.dtypes)
 print(train_data.shape)
 
+# Fill in the missing values of column 8 using its average
+separate_output('Filled Missing in Column 8')
+new_col = fill_col_with_mean(train_data, col_index='col_8', specifier='?')
+print(new_col)
