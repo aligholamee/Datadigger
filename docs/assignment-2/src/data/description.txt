@@ -1,43 +1,44 @@
 Attribute Information:
-    1. family:		--,GB,GK,GS,TN,ZA,ZF,ZH,ZM,ZS
-    2. product-type:	C, H, G
-    3. steel:		-,R,A,U,K,M,S,W,V
-    4. carbon:		continuous
-    5. hardness:	continuous
-    6. temper_rolling:	-,T
-    7. condition:	-,S,A,X
-    8. formability:	-,1,2,3,4,5
-    9. strength:	continuous
-   10. non-ageing:	-,N
-   11. surface-finish:	P,M,-
-   12. surface-quality: -,D,E,F,G
-   13. enamelability:	-,1,2,3,4,5
-   14. bc:		Y,-
-   15. bf:		Y,-
-   16. bt:		Y,-
-   17. bw/me:		B,M,-
-   18. bl:		Y,-
-   19. m:		Y,-
-   20. chrom:		C,-
-   21. phos:		P,-
-   22. cbond:		Y,-
-   23. marvi:		Y,-
-   24. exptl:		Y,-
-   25. ferro:		Y,-
-   26. corr:		Y,-
-   27. blue/bright/varn/clean:		B,R,V,C,-
-   28. lustre:		Y,-
-   29. jurofm:		Y,-
-   30. s:		Y,-
-   31. p:		Y,-
-   32. shape:		COIL, SHEET
-   33. thick:		continuous
-   34. width:		continuous
-   35. len:		continuous
-   36. oil:		-,Y,N
-   37. bore:		0000,0500,0600,0760
-   38. packing:	-,1,2,3
-   classes:        1,2,3,4,5,U
+    1. family:		--,GB,GK,GS,TN,ZA,ZF,ZH,ZM,ZS -> Convert to numeric type
+    2. product-type:	C, H, G                   -> Convert to numeric type
+    3. steel:		-,R,A,U,K,M,S,W,V             -> Convert to numeric type
+    4. carbon:		continuous                    -> Normalization
+    5. hardness:	continuous                    -> Normalization
+    6. temper_rolling:	-,T                       -> Convert to numeric type
+    7. condition:	-,S,A,X                       -> Convert to numeric type
+    8. formability:	-,1,2,3,4,5                   -> Guess its ok!
+    9. strength:	continuous                    -> Normalization
+   10. non-ageing:	-,N                           -> Convert to numeric 
+   11. surface-finish:	P,M,-                     -> Convert to numeric
+   12. surface-quality: -,D,E,F,G                 -> Convert to numeric
+   13. enamelability:	-,1,2,3,4,5               -> Guess its ok!
+   14. bc:		Y,-                               -> Convert to numeric
+   15. bf:		Y,-                               -> Convert to numeric
+   16. bt:		Y,-                               -> Convert to numeric
+   17. bw/me:		B,M,-                         -> Convert to numeric
+   18. bl:		Y,-                               -> Convert to numeric   
+   19. m:		Y,-                               -> Convert to numeric
+   20. chrom:		C,-                           -> Convert to numeric
+   21. phos:		P,-                           -> Convert to numeric
+   22. cbond:		Y,-                           -> Convert to numeric
+   23. marvi:		Y,-                           -> Convert to numeric
+   24. exptl:		Y,-                           -> Convert to numeric
+   25. ferro:		Y,-                           -> Convert to numeric
+   26. corr:		Y,-                           -> Convert to numeric
+   27. blue/bright/varn/clean:		B,R,V,C,-     -> Convert to numeric
+   28. lustre:		Y,-                           -> Convert to numeric
+   29. jurofm:		Y,-                           -> Convert to numeric
+   30. s:		Y,-                               -> Convert to numeric
+   31. p:		Y,-                               -> Convert to numeric
+   32. shape:		COIL, SHEET                   -> Convert to numeric
+   33. thick:		continuous                    -> Normalization
+   34. width:		continuous                    -> Normalization
+   35. len:		continuous                        -> Normalization
+   36. oil:		-,Y,N                             -> Convert to numeric
+   37. bore:		0000,0500,0600,0760           -> Normalization
+   38. packing:	-,1,2,3                           -> Guess its ok!
+
+   classes:        1,2,3,4,5,U                    -> 6 Target Classes                
  
    -- The '-' values are actually 'not_applicable' values rather than
       'missing_values' (and so can be treated as legal discrete
