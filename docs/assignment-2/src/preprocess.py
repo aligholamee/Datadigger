@@ -120,7 +120,7 @@ train_data = StandardScaler().fit_transform(train_data)
 print(train_data.shape)
 
 
-# Dimensionalit Reduction with PCA
+# Dimensionality Reduction with PCA
 pca = PCA(n_components=5)   # Since we have 5 classes
 pca.fit(train_data)         # fit pca on train data
 
