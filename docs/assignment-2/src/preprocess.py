@@ -75,6 +75,9 @@ pp = pprint.PrettyPrinter(indent=4)
 pp.pprint(nan_cols)
 
 # Drop the columns with more than 500 missing values
-separate_output('Columns to Drop')
+separate_output('Columns After Drop')
 cols_to_drop = [key for key, value in nan_cols.items() if value > 500]
-print(cols_to_drop)
+train_data = train_data.drop(cols_to_drop, axis=1)
+print(train_data.dtypes)
+print(train_data.shape)
+
