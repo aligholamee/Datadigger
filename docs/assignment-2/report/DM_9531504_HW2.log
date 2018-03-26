@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.3.24)  26 MAR 2018 02:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.3.24)  26 MAR 2018 02:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1450,20 +1450,20 @@ Package xcolor Warning: Incompatible color definition on input line 243.
 Package xcolor Warning: Incompatible color definition on input line 246.
 
 [4]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 253.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 253.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 260.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 260.
  (./DM_9531504_HW2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 253.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 253.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 260.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 260.
 Package rerunfilecheck Info: File `DM_9531504_HW2.out' has not changed.
 (rerunfilecheck)             Checksum: ADCBBDC189D2D1F45F0FA719B995F9D7;53.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 253.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 260.
  ) 
 Here is how much of TeX's memory you used:
- 19511 strings out of 492995
- 351343 string characters out of 6136402
+ 19528 strings out of 492995
+ 351555 string characters out of 6136402
  446604 words of memory out of 5000000
- 22641 multiletter control sequences out of 15000+600000
+ 22653 multiletter control sequences out of 15000+600000
  12377 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,6n,54p,1128b,1898s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1478,10 +1478,10 @@ y8.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c
 :/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive
 /2017/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb><c:/texlive/2017/texmf-d
 ist/fonts/type1/public/txfonts/t1xtt.pfb>
-Output written on DM_9531504_HW2.pdf (4 pages, 142858 bytes).
+Output written on DM_9531504_HW2.pdf (4 pages, 143960 bytes).
 PDF statistics:
- 161 PDF objects out of 1000 (max. 8388607)
- 141 compressed objects within 2 object streams
- 69 named destinations out of 1000 (max. 500000)
+ 168 PDF objects out of 1000 (max. 8388607)
+ 148 compressed objects within 2 object streams
+ 74 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

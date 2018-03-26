@@ -250,4 +250,11 @@ Now we perform a handy task called \textit{Standardization}. We can use either \
 	train_data = StandardScaler().fit_transform(train_data)
 \end{python}
 This snippet will return a \textit{numpy} array of train data. Now we perform a \textit{Principal Component Analysis} to extract the best features depicting our dataset.
+\begin{python}
+	pca = PCA(n_components=5)
+	pca.fit(train_data)
+	train_data = pca.transform(train_data)
+	test_data = pca.transform(test_data)
+\end{python}
+Now enough for the \textit{preprocessing} phase. In the next phase, I'll be digging through the \textit{Classification} using a \textit{Decision Tree} classifier.
 \end{document}
