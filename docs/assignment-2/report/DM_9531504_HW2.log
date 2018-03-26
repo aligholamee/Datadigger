@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.24)  27 MAR 2018 02:29
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.24)  27 MAR 2018 02:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2410,13 +2410,13 @@ File: dt1.png Graphic file (type QTm)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [6]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 365.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 366.
  [7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 365.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 366.
  (./DM_9531504_HW2.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 365.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 365.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 365.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 366.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 366.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 366.
  )
 (\end occurred when \ifx on line 161 was incomplete) 
 Here is how much of TeX's memory you used:
