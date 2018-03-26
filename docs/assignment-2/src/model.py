@@ -7,8 +7,9 @@ from sklearn.decomposition import PCA
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import export_graphviz
 from sklearn.externals.six import StringIO
-from sklearn.metrics import accuracy_score, recall_score
+from sklearn.metrics import precision_recall_fscore_support as score
 from IPython.display import Image
+from sklearn.model_selection import train_test_split
 import pydotplus
 
 # Define root data path
@@ -125,30 +126,35 @@ separate_output('Standardized Train Data')
 train_data = StandardScaler().fit_transform(train_data)
 print(train_data.shape)
 
+# Export the tree graph
+# dot_data = StringIO()
+# export_graphviz(decision_tree, out_file=dot_data,  
+#                 filled=True, rounded=True,
+#                 special_characters=True)
+# graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
+# Image(graph.create_png())
+
+# Find the accuracy and recall of the prediction
+separate_output("Evaluation Results")
+train_data, test_data, train_labels, test_labels = train_test_split(train_data, train_labels, test_size=0.2)
+
 # Dimensionality Reduction with PCA
-pca = PCA(n_components=5)   # Since we have 5 classes
+pca = PCA(n_components=6)   # Since we have 6 classes
 pca.fit(train_data)         # fit pca on train data
 
 # Apply transformation on both test and train data
 train_data = pca.transform(train_data)
-# test_data = pca.transform(test_data)
+test_data = pca.transform(test_data)
 
 # Training a decision tree model
 decision_tree = DecisionTreeClassifier()
 decision_tree.fit(train_data, train_labels)
 
-# Export the tree graph
-dot_data = StringIO()
-export_graphviz(decision_tree, out_file=dot_data,  
-                filled=True, rounded=True,
-                special_characters=True)
-graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
-Image(graph.create_png())
-
-# Find the accuracy and recall of the prediction
-separate_output("Accuracy & Recall")
-prediction = decision_tree.predict(train_data)
-accuracy = accuracy_score(train_labels, prediction)
-# recall = recall_score(train_labels, prediction)
-print("Accuracy: ", accuracy)
-# print("Recall: ", recall)
+prediction = decision_tree.predict(test_data)
+precision, recall, fscore, support = score(test_labels, prediction)
+for i in range(0, 5):
+    print('\nClass ', i)
+    print('     precision: ', precision[i])
+    print('     recall: ', recall[i])
+    print('     fscore: ', fscore[i])
+    print('     support: ', support[i])
