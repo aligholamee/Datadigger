@@ -15,6 +15,10 @@ import pydotplus
 # Define root data path
 DATA_ROOT = './data/'
 
+# Thresholds for the missing values in test and train dataset
+TRAIN_NAN_THR = 500
+TEST_NAN_THR = 40
+
 # A function to separate the different outputs of each section.
 # This will be used to display the data in the terminal in a readable way.
 def separate_output(str):
@@ -93,16 +97,22 @@ separate_output('Number of Classes in Train Data')
 print(train_data['col_39'].value_counts())
 
 # Get the number of missing values in a descending order
-nan_cols = compute_nans(train_data)
-separate_output('NaNs in Columns')
+train_nan_cols = compute_nans(train_data)
+test_nan_cols = compute_nans(test_data)
+separate_output('NaNs in Train Columns')
 pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(nan_cols)
+pp.pprint(train_nan_cols)
+separate_output('NaNs in Test Columns')
+pp = pprint.PrettyPrinter(indent=4)
+pp.pprint(test_nan_cols)
 
 # Drop the columns with more than 500 missing values
-separate_output('Columns After Drop')
-cols_to_drop = [key for key, value in nan_cols.items() if value > 500]
-train_data = train_data.drop(cols_to_drop, axis=1)
-test_data = test_data.drop(cols_to_drop, axis=1)
+separate_output('Train Columns After Drop')
+separate_output('Test Columns Columns After Drop')
+train_cols_to_drop = [key for key, value in train_nan_cols.items() if value > TRAIN_NAN_THR]
+test_cols_to_drop = [key for key, value in test_nan_cols.items() if value > TEST_NAN_THR]
+train_data = train_data.drop(train_cols_to_drop, axis=1)
+test_data = test_data.drop(test_cols_to_drop, axis=1)
 
 # Fill in the missing values of column 8 using its average
 separate_output('Data with Filled Missing Values in Float Dtypes')
@@ -110,15 +120,21 @@ train_data = train_data.replace('?', np.NaN)            # Fix non standard missi
 test_data = test_data.replace('?', np.NaN)
 train_data.col_8 = train_data.col_8.astype(float)       # Mean does not work for int
 test_data.col_8 = test_data.col_8.astype(float)
+
+separate_output("TRAIN DATA")
+print(train_data.dtypes)
+separate_output("TEST DATA")
+print(test_data.dtypes)
+
 train_data['col_8'].fillna(train_data['col_8'].mean(), inplace=True)
 test_data['col_8'].fillna(test_data['col_8'].mean(), inplace=True)
 
 # Bring out the training labels before anything stupid happens
 separate_output('Separated Training Labels')
 train_labels = train_data['col_39']
-test_labels = test_data['col_39']
+# test_labels = test_data['col_39'] -> We don't have the labels :D
 train_data = train_data.drop(['col_39'], axis=1)
-test_data = test_data.drop(['col_39'], axis=1)
+# test_data = test_data.drop(['col_39'], axis=1)    -> We don't have the labels
 
 # Convert the categorical data to the numeric form
 # Select the columns with object type
