@@ -10,6 +10,7 @@ from sklearn.externals.six import StringIO
 from sklearn.metrics import precision_recall_fscore_support as score
 from IPython.display import Image
 from sklearn.model_selection import train_test_split
+from sklearn import cross_validation
 import pydotplus
 
 # Define root data path
@@ -181,3 +182,6 @@ for i in range(0, len(classes)):
     print('     precision = {prec:4.2f}%'.format(prec=precision[i]*100))
     print('     recall = {rc:4.2f}%'.format(rc=recall[i]*100))
     print('     fscore = {fsc:4.2f}%'.format(fsc=fscore[i]*100))
+
+# Implementing the cross validation
+separate_output('Cross Validated')
