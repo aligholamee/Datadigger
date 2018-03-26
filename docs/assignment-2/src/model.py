@@ -178,7 +178,6 @@ classes = []
 [classes.append(x) for x in test_labels if x not in classes]
 for i in range(0, len(classes)):
     print('\nClass ', classes[i])
-    print('     precision: %f %', precision[i]*00)
-    print('     recall: %f %', recall[i]*100)
-    print('     fscore: %f %', fscore[i]*100)
-    print('     support: %f %', support[i]*100)
+    print('     precision = {prec:4.2f}%'.format(prec=precision[i]*100))
+    print('     recall = {rc:4.2f}%'.format(rc=recall[i]*100))
+    print('     fscore = {fsc:4.2f}%'.format(fsc=fscore[i]*100))
