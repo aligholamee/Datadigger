@@ -87,8 +87,8 @@ print(train_data.dtypes)
 separate_output('Statistical Information')
 print(train_data.describe())
 
-separate_output('Counts Values on a Column')
-print(train_data['col_1'].value_counts())
+separate_output('Number of Classes in Train Data')
+print(train_data['col_39'].value_counts())
 
 # Get the number of missing values in a descending order
 nan_cols = compute_nans(train_data)
@@ -152,8 +152,10 @@ decision_tree.fit(train_data, train_labels)
 
 prediction = decision_tree.predict(test_data)
 precision, recall, fscore, support = score(test_labels, prediction)
+classes = []
+[classes.append(x) for x in train_labels if x not in classes]
 for i in range(0, 5):
-    print('\nClass ', i)
+    print('\nClass ', classes[i])
     print('     precision: ', precision[i])
     print('     recall: ', recall[i])
     print('     fscore: ', fscore[i])
