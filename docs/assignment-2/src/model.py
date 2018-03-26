@@ -74,10 +74,12 @@ train_data = pd.read_csv(DATA_ROOT + 'train.csv')
 test_data = pd.read_csv(DATA_ROOT + 'test.csv')
 
 # Generate column names
-COLUMN_NAMES = ['col_' + str(i+1) for i in range(train_data.shape[1])]
+TRAIN_COLUMN_NAMES = ['col_' + str(i+1) for i in range(train_data.shape[1])]
+TEST_COLUMN_NAMES = ['col_' + str(i+1) for i in range(test_data.shape[1])]
 
 # Rename dataframe columns
-train_data.columns = COLUMN_NAMES
+train_data.columns = TRAIN_COLUMN_NAMES
+test_data.columns = TEST_COLUMN_NAMES
 
 # Get datatypes
 separate_output('Training Data Types')
@@ -100,31 +102,35 @@ pp.pprint(nan_cols)
 separate_output('Columns After Drop')
 cols_to_drop = [key for key, value in nan_cols.items() if value > 500]
 train_data = train_data.drop(cols_to_drop, axis=1)
+test_data = test_data.drop(cols_to_drop, axis=1)
 
 # Fill in the missing values of column 8 using its average
 separate_output('Data with Filled Missing Values in Float Dtypes')
 train_data = train_data.replace('?', np.NaN)            # Fix non standard missing values
+test_data = test_data.replace('?', np.NaN)
 train_data.col_8 = train_data.col_8.astype(float)       # Mean does not work for int
+test_data.col_8 = test_data.col_8.astype(float)
 train_data['col_8'].fillna(train_data['col_8'].mean(), inplace=True)
-print(train_data.dtypes)
+test_data['col_8'].fillna(test_data['col_8'].mean(), inplace=True)
 
 # Bring out the training labels before anything stupid happens
 separate_output('Separated Training Labels')
 train_labels = train_data['col_39']
+test_labels = test_data['col_39']
 train_data = train_data.drop(['col_39'], axis=1)
-print(train_labels)
+test_data = test_data.drop(['col_39'], axis=1)
 
 # Convert the categorical data to the numeric form
 # Select the columns with object type
 separate_output('Converted Data to Numeric Format')
 train_data = obj_to_num(train_data)
-print(train_data)
+test_data = obj_to_num(test_data)
 
 # Standardize the data using Standard Scaler
 # Standardize the data along each column
 separate_output('Standardized Train Data')
 train_data = StandardScaler().fit_transform(train_data)
-print(train_data.shape)
+test_data = StandardScaler().fit_transform(test_data)
 
 # Export the tree graph
 # dot_data = StringIO()
@@ -135,26 +141,28 @@ print(train_data.shape)
 # Image(graph.create_png())
 
 # Find the accuracy and recall of the prediction
-separate_output("Evaluation Results")
-train_data, test_data, train_labels, test_labels = train_test_split(train_data, train_labels, test_size=0.2)
+# separate_output("Evaluation Results")
+# train_data, test_data, train_labels, test_labels = train_test_split(train_data, train_labels, test_size=0.2)
 
 # Dimensionality Reduction with PCA
-pca = PCA(n_components=6)   # Since we have 6 classes
-pca.fit(train_data)         # fit pca on train data
+# pca = PCA(n_components=6)   # Since we have 6 classes
+# pca.fit(train_data)         # fit pca on train data
 
-# Apply transformation on both test and train data
-train_data = pca.transform(train_data)
-test_data = pca.transform(test_data)
+# # # Apply transformation on both test and train data
+# train_data = pca.transform(train_data)
+# test_data = pca.transform(test_data)
 
 # Training a decision tree model
 decision_tree = DecisionTreeClassifier()
+separate_output('Number of Features')
+
 decision_tree.fit(train_data, train_labels)
 
 prediction = decision_tree.predict(test_data)
 precision, recall, fscore, support = score(test_labels, prediction)
 classes = []
-[classes.append(x) for x in train_labels if x not in classes]
-for i in range(0, 5):
+[classes.append(x) for x in test_labels if x not in classes]
+for i in range(0, len(classes)):
     print('\nClass ', classes[i])
     print('     precision: ', precision[i])
     print('     recall: ', recall[i])
