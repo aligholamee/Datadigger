@@ -9,8 +9,7 @@ from sklearn.tree import export_graphviz
 from sklearn.externals.six import StringIO
 from sklearn.metrics import precision_recall_fscore_support as score
 from IPython.display import Image
-from sklearn.model_selection import train_test_split
-from sklearn import cross_validation
+from sklearn.model_selection import train_test_split, cross_val_predict, cross_val_score
 import pydotplus
 
 # Define root data path
@@ -159,29 +158,34 @@ test_data = StandardScaler().fit_transform(test_data)
 
 # Find the accuracy and recall of the prediction
 separate_output("Evaluation Results")
-train_data, test_data, train_labels, test_labels = train_test_split(train_data, train_labels, test_size=0.2)
+# train_data, test_data, train_labels, test_labels = train_test_split(train_data, train_labels, test_size=0.2)
 
-# Dimensionality Reduction with PCA
-# pca = PCA(n_components=6)   # Since we have 6 classes
-# pca.fit(train_data)         # fit pca on train data
+# # Dimensionality Reduction with PCA
+# # pca = PCA(n_components=6)   # Since we have 6 classes
+# # pca.fit(train_data)         # fit pca on train data
 
-# # # Apply transformation on both test and train data
-# train_data = pca.transform(train_data)
-# test_data = pca.transform(test_data)
+# # # # Apply transformation on both test and train data
+# # train_data = pca.transform(train_data)
+# # test_data = pca.transform(test_data)
 
-# Training a decision tree model
+# # Training a decision tree model
 decision_tree = DecisionTreeClassifier()
-decision_tree.fit(train_data, train_labels)
+# decision_tree.fit(train_data, train_labels)
 
-prediction = decision_tree.predict(test_data)
-precision, recall, fscore, support = score(test_labels, prediction)
-classes = []
-[classes.append(x) for x in test_labels if x not in classes]
-for i in range(0, len(classes)):
-    print('\nClass ', classes[i])
-    print('     precision = {prec:4.2f}%'.format(prec=precision[i]*100))
-    print('     recall = {rc:4.2f}%'.format(rc=recall[i]*100))
-    print('     fscore = {fsc:4.2f}%'.format(fsc=fscore[i]*100))
+# prediction = decision_tree.predict(test_data)
+# precision, recall, fscore, support = score(test_labels, prediction)
+# classes = []
+# [classes.append(x) for x in test_labels if x not in classes]
+# for i in range(0, len(classes)):
+#     print('\nClass ', classes[i])
+#     print('     precision = {prec:4.2f}%'.format(prec=precision[i]*100))
+#     print('     recall = {rc:4.2f}%'.format(rc=recall[i]*100))
+#     print('     fscore = {fsc:4.2f}%'.format(fsc=fscore[i]*100))
 
 # Implementing the cross validation
-separate_output('Cross Validated')
+separate_output('Mean Accuracy of 5 Folds')
+NUM_FOLDS = 5
+predicted = cross_val_predict(decision_tree, train_data, train_labels, cv=NUM_FOLDS)
+scores = cross_val_score(decision_tree, train_data, train_labels, cv=NUM_FOLDS)
+print(scores)
+print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
