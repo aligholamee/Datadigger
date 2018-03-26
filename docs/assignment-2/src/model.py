@@ -7,6 +7,7 @@ from sklearn.decomposition import PCA
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import export_graphviz
 from sklearn.externals.six import StringIO
+from sklearn.metrics import accuracy_score, recall_score
 from IPython.display import Image
 import pydotplus
 
@@ -144,4 +145,10 @@ export_graphviz(decision_tree, out_file=dot_data,
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
 Image(graph.create_png())
 
-
+# Find the accuracy and recall of the prediction
+separate_output("Accuracy & Recall")
+prediction = decision_tree.predict(train_data)
+accuracy = accuracy_score(train_labels, prediction)
+# recall = recall_score(train_labels, prediction)
+print("Accuracy: ", accuracy)
+# print("Recall: ", recall)

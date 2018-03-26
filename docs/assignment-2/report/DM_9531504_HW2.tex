@@ -23,7 +23,11 @@
 \renewcommand{\topfraction}{0.85}
 \renewcommand{\bottomfraction}{0.85}
 \renewcommand{\floatpagefraction}{0.90}
-
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{epstopdf}
 \makeatletter
 \setlength{\arraycolsep}{2\p@} % make spaces around "=" in eqnarray smaller
 \makeatother
@@ -264,6 +268,14 @@ In this section, we first apply a simple decision tree on our training data.
 	decision_tree = DecisionTreeClassifier()
 	decision_tree.fit(train_data, train_labels)
 \end{python}
-Of course, this is the simplest decision tree we can obtain right now. Nonetheless, we'll export the learned decision tree to watch it little bit!
+Of course, this is the simplest decision tree we can obtain right now. Nonetheless, we'll export the learned decision tree to watch it little bit! In the figure 2.1, we have provided a this decision tree. So, the time for evaluation has arrived. Let's evaluate the trained model on the training set first, then on the test set. We then perform various tweaks with the help of \textit{gridsearch} of \textit{Scikit} library.
+
+\newpage
+\begin{sidewaysfigure}[ht]
+	\includegraphics[width=\textwidth]{dt1.png}
+	\caption{The First Lucky Decision Tree Trained on Annealing Dataset.}
+	\label{fig:PropProf}
+\end{sidewaysfigure}
+
 
 \end{document}
