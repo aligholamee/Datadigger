@@ -157,8 +157,8 @@ test_data = StandardScaler().fit_transform(test_data)
 # Image(graph.create_png())
 
 # Find the accuracy and recall of the prediction
-# separate_output("Evaluation Results")
-# train_data, test_data, train_labels, test_labels = train_test_split(train_data, train_labels, test_size=0.2)
+separate_output("Evaluation Results")
+train_data, test_data, train_labels, test_labels = train_test_split(train_data, train_labels, test_size=0.2)
 
 # Dimensionality Reduction with PCA
 # pca = PCA(n_components=6)   # Since we have 6 classes
@@ -170,8 +170,6 @@ test_data = StandardScaler().fit_transform(test_data)
 
 # Training a decision tree model
 decision_tree = DecisionTreeClassifier()
-separate_output('Number of Features')
-
 decision_tree.fit(train_data, train_labels)
 
 prediction = decision_tree.predict(test_data)
@@ -180,7 +178,7 @@ classes = []
 [classes.append(x) for x in test_labels if x not in classes]
 for i in range(0, len(classes)):
     print('\nClass ', classes[i])
-    print('     precision: ', precision[i])
-    print('     recall: ', recall[i])
-    print('     fscore: ', fscore[i])
-    print('     support: ', support[i])
+    print('     precision: %f %', precision[i]*00)
+    print('     recall: %f %', recall[i]*100)
+    print('     fscore: %f %', fscore[i]*100)
+    print('     support: %f %', support[i]*100)
