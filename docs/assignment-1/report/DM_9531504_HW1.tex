@@ -5,9 +5,12 @@
 \usepackage{path}
 \usepackage{url}
 \usepackage{verbatim}
-\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
 \usepackage{array}
 \usepackage{multirow}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\setmainfont[Scale=0.85, Ligatures={Required,Common,Contextual,TeX}]{TeX Gyre Schola} % Incredible font inside latex
 
 % horizontal margins: 1.0 + 6.5 + 1.0 = 8.5
 \setlength{\oddsidemargin}{0.0in}
@@ -101,8 +104,8 @@ anchorcolor = darkblue]{hyperref}
 \DeclareGraphicsExtensions{.jpg}
 
 \begin{center}
-\textsc{\Large Data Mining} \\[2pt]
-	\textsc{\large Assignment 1}\\
+\textsc{\Huge Data Mining} \\[2pt]
+	\textsc{\Large Assignment 1}\\
 	\vspace{0.5cm}
   Ali Gholami \\[6pt]
   Department of Computer Engineering \& Information Technology\\

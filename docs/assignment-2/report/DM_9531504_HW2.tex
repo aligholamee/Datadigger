@@ -5,7 +5,7 @@
 \usepackage{path}
 \usepackage{url}
 \usepackage{verbatim}
-\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
 \usepackage{array}
 \usepackage{multirow}
 
@@ -53,6 +53,7 @@
 \definecolor{deepblue}{rgb}{0,0,0.5}
 \definecolor{deepred}{rgb}{0.6,0,0}
 \definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
 
 \usepackage{listings}
 
@@ -66,7 +67,8 @@
 		emphstyle=\ttb\color{deepred},    % Custom highlighting style
 		stringstyle=\color{deepgreen},
 		frame=tb,                         % Any extra options here
-		showstringspaces=false            % 
+		showstringspaces=false,            % 
+		backgroundcolor=\color{backcolour}
 }}
 
 
@@ -93,6 +95,33 @@
 \newcommand{\IC}{\mathbb{C}}
 \newcommand{\Real}[1]{\mathrm{Re}\left({#1}\right)}
 \newcommand{\Imag}[1]{\mathrm{Im}\left({#1}\right)}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{capt-of}
+%dashed line
+\usepackage{array}
+\usepackage{arydshln}
+\setlength\dashlinedash{0.2pt}
+\setlength\dashlinegap{1.5pt}
+\setlength\arrayrulewidth{0.3pt}
+
+%Widows & Orphans & Penalties
+
+\widowpenalty500
+\clubpenalty500
+\clubpenalty=9996
+\exhyphenpenalty=50 %for line-breaking at an explicit hyphen
+\brokenpenalty=4991
+\predisplaypenalty=10000
+\postdisplaypenalty=1549
+\displaywidowpenalty=1602
+\floatingpenalty = 20000
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\setmainfont[Scale=0.85, Ligatures={Required,Common,Contextual,TeX}]{TeX Gyre Schola} % Incredible font inside latex
+
 
 \newcommand{\norm}[2]{\|{#1}\|_{{}_{#2}}}
 \newcommand{\abs}[1]{\left|{#1}\right|}
@@ -148,8 +177,8 @@ anchorcolor = darkblue]{hyperref}
 \DeclareGraphicsExtensions{.jpg}
 
 \begin{center}
-\textsc{\Large Data Mining} \\[2pt]
-	\textsc{\large Assignment 2}\\
+\textsc{\Huge Data Mining} \\[2pt]
+	\textsc{\Large Assignment 2}\\
 	\vspace{0.5cm}
   Ali Gholami \\[6pt]
   Department of Computer Engineering \& Information Technology\\
@@ -273,38 +302,21 @@ Of course, this is the simplest decision tree we can obtain right now. Nonethele
 	train_data, test_data, train_labels, test_labels =
 	train_test_split(train_data, train_labels, test_size=0.2)
 \end{python}
-We fall into the evaluation section. Don't get nervous, we'll get back and try \textit{k-fold} cross validation also to improve the test results. We are also planned to work with \textit{search-grid}. The evaluation results for each class is given in the following pages.\newpage
-\begin{python}
-Class  3
-precision:  1.0
-recall:  1.0
-fscore:  1.0
-support:  2
-
-Class  5
-precision:  1.0
-recall:  1.0
-fscore:  1.0
-support:  17
-
-Class  U
-precision:  0.9920634920634921
-recall:  0.9920634920634921
-fscore:  0.9920634920634921
-support:  126
-
-Class  2
-precision:  0.9
-recall:  1.0
-fscore:  0.9473684210526316
-support:  9
-
-Class  1
-precision:  1.0
-recall:  0.8333333333333334
-fscore:  0.9090909090909091
-support:  6                                                                                                                                                                                                      
-\end{python}
+We fall into the evaluation section. Don't get nervous, we'll get back and try \textit{k-fold} cross validation also to improve the test results. We are also planned to work with \textit{search-grid}. The evaluation metrics for the initial decision tree is given in the table 2.1.\newpage
+\begin{table*}[!h] \centering
+	%\ra{1.3}
+	\begin{small}
+		\begin{tabular}{@{}lrrrrrr@{}}\toprule
+			\textbf{Metric/Class} & \textbf{'1'} & \textbf{'2'} & \textbf{'3'} & \textbf{'4'} & \textbf{'5'} & \textbf{'U'}\\ \midrule
+			\textbf{Precision} & 100\% & 90\% & 100\% & NaN & 100\% & 99\%\\ \hdashline
+			\textbf{Recall} & 83\% & 100\% & 100\% & NaN & 100\% & 99\%\\ \hdashline
+			\textbf{F-Score} & 90\% & 94\% & 100\% & NaN & 100\% & 99\%\\ \hdashline
+			\textbf{Support} & 6 & 9 & 2 & NaN & 17 & 126\\ \hdashline
+			\bottomrule
+		\end{tabular}
+	\end{small}
+	\caption{Measurements of the initial decision tree classifier without cross validation.}
+\end{table*}
 
 \begin{sidewaysfigure}[!h]
 	\includegraphics[width=\textwidth]{dt1.png}
