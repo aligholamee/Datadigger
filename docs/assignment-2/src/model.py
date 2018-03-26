@@ -5,6 +5,10 @@ from collections import deque
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import export_graphviz
+from sklearn.externals.six import StringIO
+from IPython.display import Image
+import pydotplus
 
 # Define root data path
 DATA_ROOT = './data/'
@@ -131,3 +135,11 @@ train_data = pca.transform(train_data)
 # Training a decision tree model
 decision_tree = DecisionTreeClassifier()
 decision_tree.fit(train_data, train_labels)
+
+# Export the tree graph
+dot_data = StringIO()
+export_graphviz(decision_tree, out_file=dot_data,  
+                filled=True, rounded=True,
+                special_characters=True)
+graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
+Image(graph.create_png())

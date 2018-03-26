@@ -257,4 +257,13 @@ This snippet will return a \textit{numpy} array of train data. Now we perform a 
 	test_data = pca.transform(test_data)
 \end{python}
 Now enough for the \textit{preprocessing} phase. In the next phase, I'll be digging through the \textit{Classification} using a \textit{Decision Tree} classifier.
+
+\section{Classification}
+In this section, we first apply a simple decision tree on our training data.
+\begin{python}
+	decision_tree = DecisionTreeClassifier()
+	decision_tree.fit(train_data, train_labels)
+\end{python}
+Of course, this is the simplest decision tree we can obtain right now. Nonetheless, we'll export the learned decision tree to watch it little bit!
+
 \end{document}
