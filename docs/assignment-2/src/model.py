@@ -184,15 +184,16 @@ separate_output("Evaluation Results")
 
 
 separate_output('Decision Tree Parameters')
-param_grid = {
-    'max_depth': np.arange(3, 10),
-    'splitter': ['random', 'best'],
-    'max_features': ['log2', 'sqrt', 'auto'],
-}
-NUM_FOLDS = 5
+# param_grid = {
+#     'max_depth': np.arange(3, 10),
+#     'splitter': ['random', 'best'],
+#     'max_features': ['log2', 'sqrt', 'auto'],
+# }
+# NUM_FOLDS = 5
 # decision_tree = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=NUM_FOLDS)
-decision_tree = DecisionTreeClassifier(max_depth=9, max_features='log2', splitter='best')
+decision_tree = DecisionTreeClassifier()
 decision_tree.fit(train_data, train_labels)
+
 # Export the tree graph
 # dot_data = StringIO()
 # export_graphviz(decision_tree, out_file=dot_data,  
@@ -207,3 +208,14 @@ decision_tree.fit(train_data, train_labels)
 # print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 # separate_output('Best Parameters')
 # print(decision_tree.best_params_)
+
+# Prediction results for the test data
+separate_output('Predicted Labels of Test Data')
+predicted_labels = decision_tree.predict(test_data)
+print(predicted_labels)
+
+# Save the results to result.csv
+results = open('results.csv', 'w')
+for label in predicted_labels:
+    results.write("%s\n" % label)
+    
