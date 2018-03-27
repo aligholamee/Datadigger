@@ -346,11 +346,12 @@ The accuracy of prediction is calculated and stored in the \textit{scores} varia
 \end{python}
 This array displays the accuracy of prediction on each of these 5 folds. This part of the code integrates these values.
 \begin{python}
-	print("Accuracy: \%0.2f (+/- \%0.2f)" \% (scores.mean(), scores.std() * 2))
+	print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 \end{python}
 The mean of the accuracy is $98\%$.
 \subsection{Hyper Parameter Tuning}
-The charming section has arrived! Here is given a simple and useful function to generate the list of possible parameters for an estimator.
+\subsubsection{Parameters}
+The charming section has arrived! Here is given a simple and useful function to generate the list of possible parameters for an estimator\cite{scklearn1}.
 \begin{python}
 	print(decision_tree.get_params())
 \end{python}
@@ -361,23 +362,84 @@ The full list of possible hyper parameters is provided here.
 				   {class_label: weight}
 		\end{python}
 	\item \textbf{Criterion} -- The function to measure the quality of a split. Supported criteria are “gini” for the Gini impurity and “entropy” for the information gain.
-	\item \textbf{Max Depth} -- The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than Min Samples Split samples.
-	\item \textbf{Max Features} -- The number of features to consider when looking for the best split. It can obtain values of ``auto", ``sqrt" and ``log2".
-	\item \textbf{Max Leaf Nodes} -- Grow a tree with Max Leaf Nodes in best-first fashion.
-	\item \textbf{Min Impurity Decrease} -- A node will be split if this split induces a decrease of the impurity greater than or equal to this value.
-	\item \textbf{Min Impurity Split} -- Threshold for early stopping in tree growth. A node will split if its impurity is above the threshold, otherwise it is a leaf.
-	\item \textbf{Min Samples Leaf} -- The minimum number of samples required to be at a leaf node.
-	\item \textbf{Min Samples Split} -- The minimum number of samples required to split an internal node.
-	\item \textbf{Min Weight Fraction Leaf} -- The minimum weighted fraction of the sum total of weights (of all the input samples) required to be at a leaf node. Samples have equal weight when Sample Weight is not provided.
+	\item \textbf{Max\_Depth} -- The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than Min Samples Split samples.
+	\item \textbf{Max\_Features} -- The number of features to consider when looking for the best split. It can obtain values of ``auto", ``sqrt" and ``log2".
+	\item \textbf{Max\_Leaf\_Nodes} -- Grow a tree with Max Leaf Nodes in best-first fashion.
+	\item \textbf{Min\_Impurity\_Decrease} -- A node will be split if this split induces a decrease of the impurity greater than or equal to this value.
+	\item \textbf{Min\_Impurity\_Split} -- Threshold for early stopping in tree growth. A node will split if its impurity is above the threshold, otherwise it is a leaf.
+	\item \textbf{Min\_Samples\_Leaf} -- The minimum number of samples required to be at a leaf node.
+	\item \textbf{Min\_Samples\_Split} -- The minimum number of samples required to split an internal node.
+	\item \textbf{Min\_Weight\_Fraction\_Leaf} -- The minimum weighted fraction of the sum total of weights (of all the input samples) required to be at a leaf node. Samples have equal weight when Sample Weight is not provided.
 	\item \textbf{Presort} -- Whether to presort the data to speed up the finding of best splits in fitting. For the default settings of a decision tree on large datasets, setting this to true may slow down the training process.
-	\item \textbf{Random State} -- The seed used by the random number generator.
+	\item \textbf{Random\_State} -- The seed used by the random number generator.
 	\item \textbf{Splitter} -- The strategy used to choose the split at each node. Supported strategies are “best” to choose the best split and “random” to choose the best random split.
 \end{itemize}
+\subsubsection{Grid Search}
+It is possible and recommended to search the hyper-parameter space for the best cross validation score. Any parameter provided when constructing an estimator may be optimized in this manner\cite{scklearn2}. A search consists of the following: 
+\begin{itemize}
+	\item \textbf{Estimator}
+	\item \textbf{Parameter Space}
+	\item  \textbf{Search Method}
+	\item \textbf{Cross Validation Scheme}
+	\item \textbf{Score Function}
+\end{itemize}
+Let's play with the parameter \textbf{max\_depth} a little bit. Here is the code playing with the \textbf{max\_depth} parameter.
+\begin{python}
+	param_grid = {
+		'max_depth': np.arange(3, 10)
+	}
+	NUM_FOLDS = 5
+	decision_tree = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=NUM_FOLDS)
+	decision_tree.fit(train_data, train_labels)
+	separate_output('Mean Accuracy of 5 Folds')
+\end{python}
+We can obtain the best results using the following code.
+\begin{python}
+	separate_output('Best Parameters')
+	print(decision_tree.best_params_)
+\end{python}
+Which it was $6$ in this case. The fitted decision tree with maximum depth of $6$ is given in the figure (2.2). Now let's try something more comprehensive. The following dictionary depicts a more comprehensive parameter tuning for the decision tree. Note that maximum depth of $6$ yielded the same accuracy of $98\%$ after cross validation and prediction.
+\begin{python}
+	param_grid = {
+		'max_depth': np.arange(3, 10),
+		'splitter': ['random', 'best'],
+		'max_features': ['log2', 'sqrt', 'auto'],
+	}
+\end{python}
+The results for these settings is given below.
+\begin{python}
+		   {'max_depth': 9, 'max_features': 'log2', 'splitter': 'best'}
+\end{python}
+The decision tree is depicted in figure (2.3). The mean accuracy of folds reduced to $96\%$ with these settings.
+
+\section{Results \& Conclusion}
+\subsection{Parameters}
+\subsubsection{Effect of Maximum Depth}
+The first parameter to tune is max\_depth. This indicates how deep the tree can be. The deeper the tree, the more splits it has and it captures more information about the data.
+\subsubsection{Effect of Minimum Samples Split}
+min\_samples\_split represents the minimum number of samples required to split an internal node. This can vary between considering at least one sample at each node to considering all of the samples at each node. When we increase this parameter, the tree becomes more constrained as it has to consider more samples at each node.
+\subsubsection{Effect of Maximum Features}
+max\_features represents the number of features to consider when looking for the best split. Using less features will speed up the training process. But, it will considerably lowers the accuracy of prediction.
+\subsection{Prediction of Test Data}
+The output of my code is provided in the \textit{results.cv} file along with this report.
 \begin{sidewaysfigure}[!h]
 	\includegraphics[width=\textwidth]{dt1.png}
 	\caption{The First Lucky Decision Tree Trained on the Annealing Dataset.}
 	\label{fig:PropProf}
 \end{sidewaysfigure}
+
+\begin{sidewaysfigure}[!h]
+	\includegraphics[width=\textwidth]{dt_max_depth_6.png}
+	\caption{Decision Tree Learned with Maximum Depth of 6.}
+	\label{fig:max_width}
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}[!h]
+	\includegraphics[width=\textwidth]{dt_extra_1.png}
+	\caption{Decision Tree Learned with Final Settings.}
+	\label{fig:max_width}
+\end{sidewaysfigure}
+
 \begin{thebibliography}{999}
 	
 	\bibitem{cross_validation}
@@ -385,6 +447,16 @@ The full list of possible hyper parameters is provided here.
 	\emph{Cross-Validation in Machine Learning}.
 	Towards Data Science,
 	Jun 5, 2017.
+	
+	\bibitem{scklearn1}
+	Scikit-Learn,
+	\emph{sklearn.tree.DecisionTreeClassifier}.
+	http://scikit-learn.org.
+	
+	\bibitem{scklearn2}
+	Scikit-Learn,
+	\emph{Tuning the hyper-parameters of an estimator}.
+	http://scikit-learn.org.
 	
 \end{thebibliography}
 \end{document}

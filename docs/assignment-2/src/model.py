@@ -9,7 +9,7 @@ from sklearn.tree import export_graphviz
 from sklearn.externals.six import StringIO
 from sklearn.metrics import precision_recall_fscore_support as score
 from IPython.display import Image
-from sklearn.model_selection import train_test_split, cross_val_predict, cross_val_score
+from sklearn.model_selection import train_test_split, cross_val_predict, cross_val_score, GridSearchCV
 import pydotplus
 
 # Define root data path
@@ -169,7 +169,7 @@ separate_output("Evaluation Results")
 # # test_data = pca.transform(test_data)
 
 # # Training a decision tree model
-decision_tree = DecisionTreeClassifier()
+# decision_tree = DecisionTreeClassifier()
 # decision_tree.fit(train_data, train_labels)
 
 # prediction = decision_tree.predict(test_data)
@@ -182,13 +182,28 @@ decision_tree = DecisionTreeClassifier()
 #     print('     recall = {rc:4.2f}%'.format(rc=recall[i]*100))
 #     print('     fscore = {fsc:4.2f}%'.format(fsc=fscore[i]*100))
 
-# Implementing the cross validation
-separate_output('Mean Accuracy of 5 Folds')
+
+separate_output('Decision Tree Parameters')
+param_grid = {
+    'max_depth': np.arange(3, 10),
+    'splitter': ['random', 'best'],
+    'max_features': ['log2', 'sqrt', 'auto'],
+}
 NUM_FOLDS = 5
+# decision_tree = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=NUM_FOLDS)
+decision_tree = DecisionTreeClassifier(max_depth=9, max_features='log2', splitter='best')
+decision_tree.fit(train_data, train_labels)
+# Export the tree graph
+dot_data = StringIO()
+export_graphviz(decision_tree, out_file=dot_data,  
+                filled=True, rounded=True,
+                special_characters=True)
+graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
+Image(graph.create_png())
+separate_output('Mean Accuracy of 5 Folds')
 predicted = cross_val_predict(decision_tree, train_data, train_labels, cv=NUM_FOLDS)
 scores = cross_val_score(decision_tree, train_data, train_labels, cv=NUM_FOLDS)
 print(scores)
 print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
-
-separate_output('Decision Tree Parameters')
-print(decision_tree.get_params())
+separate_output('Best Parameters')
+# print(decision_tree.best_params_)
