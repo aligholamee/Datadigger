@@ -194,16 +194,16 @@ NUM_FOLDS = 5
 decision_tree = DecisionTreeClassifier(max_depth=9, max_features='log2', splitter='best')
 decision_tree.fit(train_data, train_labels)
 # Export the tree graph
-dot_data = StringIO()
-export_graphviz(decision_tree, out_file=dot_data,  
-                filled=True, rounded=True,
-                special_characters=True)
-graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
-Image(graph.create_png())
-separate_output('Mean Accuracy of 5 Folds')
-predicted = cross_val_predict(decision_tree, train_data, train_labels, cv=NUM_FOLDS)
-scores = cross_val_score(decision_tree, train_data, train_labels, cv=NUM_FOLDS)
-print(scores)
-print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
-separate_output('Best Parameters')
+# dot_data = StringIO()
+# export_graphviz(decision_tree, out_file=dot_data,  
+#                 filled=True, rounded=True,
+#                 special_characters=True)
+# graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
+# Image(graph.create_png())
+# separate_output('Mean Accuracy of 5 Folds')
+# predicted = cross_val_predict(decision_tree, train_data, train_labels, cv=NUM_FOLDS)
+# scores = cross_val_score(decision_tree, train_data, train_labels, cv=NUM_FOLDS)
+# print(scores)
+# print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+# separate_output('Best Parameters')
 # print(decision_tree.best_params_)
