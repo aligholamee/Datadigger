@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.24)  27 MAR 2018 16:39
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.24)  27 MAR 2018 17:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1398,8 +1398,6 @@ LaTeX Font Info:    Font shape `TU/TeXGyreSchola(0)/m/n' will be
 (Font)              scaled to size 9.30756pt on input line 191.
 LaTeX Font Info:    Font shape `TU/TeXGyreSchola(0)/bx/n' will be
 (Font)              scaled to size 9.30756pt on input line 191.
-LaTeX Font Info:    Font shape `TU/TeXGyreSchola(0)/m/it' will be
-(Font)              scaled to size 9.30756pt on input line 192.
 LaTeX Font Info:    Font shape `TU/TeXGyreSchola(0)/bx/n' will be
 (Font)              scaled to size 10.20007pt on input line 195.
 LaTeX Font Info:    Font shape `TU/TeXGyreSchola(0)/m/n' will be
@@ -1498,75 +1496,75 @@ Package xcolor Warning: Incompatible color definition on input line 208.
 
 Package xcolor Warning: Incompatible color definition on input line 208.
 
+
+Package xcolor Warning: Incompatible color definition on input line 211.
+
+
+Package xcolor Warning: Incompatible color definition on input line 211.
+
+
+Package xcolor Warning: Incompatible color definition on input line 211.
+
+
+Package xcolor Warning: Incompatible color definition on input line 211.
+
+
+Package xcolor Warning: Incompatible color definition on input line 211.
+
+
+Package xcolor Warning: Incompatible color definition on input line 212.
+
+
+Package xcolor Warning: Incompatible color definition on input line 212.
+
+
+Package xcolor Warning: Incompatible color definition on input line 212.
+
+
+Package xcolor Warning: Incompatible color definition on input line 212.
+
+
+Package xcolor Warning: Incompatible color definition on input line 212.
+
+
+Package xcolor Warning: Incompatible color definition on input line 212.
+
+
+Package xcolor Warning: Incompatible color definition on input line 212.
+
+
+Package xcolor Warning: Incompatible color definition on input line 212.
+
+
+Package xcolor Warning: Incompatible color definition on input line 212.
+
+
+Package xcolor Warning: Incompatible color definition on input line 212.
+
+
+Package xcolor Warning: Incompatible color definition on input line 212.
+
+
+Package xcolor Warning: Incompatible color definition on input line 213.
+
+
+Package xcolor Warning: Incompatible color definition on input line 213.
+
+
+Package xcolor Warning: Incompatible color definition on input line 213.
+
+
+Package xcolor Warning: Incompatible color definition on input line 213.
+
+
+Package xcolor Warning: Incompatible color definition on input line 214.
+
+
+Package xcolor Warning: Incompatible color definition on input line 214.
+
 [1
 
 ]
-
-Package xcolor Warning: Incompatible color definition on input line 211.
-
-
-Package xcolor Warning: Incompatible color definition on input line 211.
-
-
-Package xcolor Warning: Incompatible color definition on input line 211.
-
-
-Package xcolor Warning: Incompatible color definition on input line 211.
-
-
-Package xcolor Warning: Incompatible color definition on input line 211.
-
-
-Package xcolor Warning: Incompatible color definition on input line 212.
-
-
-Package xcolor Warning: Incompatible color definition on input line 212.
-
-
-Package xcolor Warning: Incompatible color definition on input line 212.
-
-
-Package xcolor Warning: Incompatible color definition on input line 212.
-
-
-Package xcolor Warning: Incompatible color definition on input line 212.
-
-
-Package xcolor Warning: Incompatible color definition on input line 212.
-
-
-Package xcolor Warning: Incompatible color definition on input line 212.
-
-
-Package xcolor Warning: Incompatible color definition on input line 212.
-
-
-Package xcolor Warning: Incompatible color definition on input line 212.
-
-
-Package xcolor Warning: Incompatible color definition on input line 212.
-
-
-Package xcolor Warning: Incompatible color definition on input line 212.
-
-
-Package xcolor Warning: Incompatible color definition on input line 213.
-
-
-Package xcolor Warning: Incompatible color definition on input line 213.
-
-
-Package xcolor Warning: Incompatible color definition on input line 213.
-
-
-Package xcolor Warning: Incompatible color definition on input line 213.
-
-
-Package xcolor Warning: Incompatible color definition on input line 214.
-
-
-Package xcolor Warning: Incompatible color definition on input line 214.
-
 
 Package xcolor Warning: Incompatible color definition on input line 217.
 
@@ -2758,11 +2756,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 462.
  )
 (\end occurred when \ifx on line 161 was incomplete) 
 Here is how much of TeX's memory you used:
- 32284 strings out of 493005
- 622963 string characters out of 6137956
- 693442 words of memory out of 5000000
- 35783 multiletter control sequences out of 15000+600000
- 14465 words of font info for 70 fonts, out of 8000000 for 9000
+ 32282 strings out of 493005
+ 622858 string characters out of 6137956
+ 693537 words of memory out of 5000000
+ 35782 multiletter control sequences out of 15000+600000
+ 14457 words of font info for 69 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  55i,10n,79p,10472b,1778s stack positions out of 5000i,500n,10000p,200000b,80000s
 
