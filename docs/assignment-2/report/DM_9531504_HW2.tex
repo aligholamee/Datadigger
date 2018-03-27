@@ -349,6 +349,30 @@ This array displays the accuracy of prediction on each of these 5 folds. This pa
 	print("Accuracy: \%0.2f (+/- \%0.2f)" \% (scores.mean(), scores.std() * 2))
 \end{python}
 The mean of the accuracy is $98\%$.
+\subsection{Hyper Parameter Tuning}
+The charming section has arrived! Here is given a simple and useful function to generate the list of possible parameters for an estimator.
+\begin{python}
+	print(decision_tree.get_params())
+\end{python}
+The full list of possible hyper parameters is provided here.
+\begin{itemize}
+	\item \textbf{Class Weight} Weights associated with classes in the following form.
+		\begin{python}
+				   {class_label: weight}
+		\end{python}
+	\item \textbf{Criterion} -- The function to measure the quality of a split. Supported criteria are “gini” for the Gini impurity and “entropy” for the information gain.
+	\item \textbf{Max Depth} -- The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than Min Samples Split samples.
+	\item \textbf{Max Features} -- The number of features to consider when looking for the best split. It can obtain values of ``auto", ``sqrt" and ``log2".
+	\item \textbf{Max Leaf Nodes} -- Grow a tree with Max Leaf Nodes in best-first fashion.
+	\item \textbf{Min Impurity Decrease} -- A node will be split if this split induces a decrease of the impurity greater than or equal to this value.
+	\item \textbf{Min Impurity Split} -- Threshold for early stopping in tree growth. A node will split if its impurity is above the threshold, otherwise it is a leaf.
+	\item \textbf{Min Samples Leaf} -- The minimum number of samples required to be at a leaf node.
+	\item \textbf{Min Samples Split} -- The minimum number of samples required to split an internal node.
+	\item \textbf{Min Weight Fraction Leaf} -- The minimum weighted fraction of the sum total of weights (of all the input samples) required to be at a leaf node. Samples have equal weight when Sample Weight is not provided.
+	\item \textbf{Presort} -- Whether to presort the data to speed up the finding of best splits in fitting. For the default settings of a decision tree on large datasets, setting this to true may slow down the training process.
+	\item \textbf{Random State} -- The seed used by the random number generator.
+	\item \textbf{Splitter} -- The strategy used to choose the split at each node. Supported strategies are “best” to choose the best split and “random” to choose the best random split.
+\end{itemize}
 \begin{sidewaysfigure}[!h]
 	\includegraphics[width=\textwidth]{dt1.png}
 	\caption{The First Lucky Decision Tree Trained on the Annealing Dataset.}

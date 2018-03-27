@@ -189,3 +189,6 @@ predicted = cross_val_predict(decision_tree, train_data, train_labels, cv=NUM_FO
 scores = cross_val_score(decision_tree, train_data, train_labels, cv=NUM_FOLDS)
 print(scores)
 print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+
+separate_output('Decision Tree Parameters')
+print(decision_tree.get_params())
