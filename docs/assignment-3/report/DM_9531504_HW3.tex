@@ -189,50 +189,29 @@ anchorcolor = darkblue]{hyperref}
 \end{center}
 
 \begin{abstract}
-A tree has many analogies in real life, and turns out that it has influenced a wide area of machine learning, covering both classification and regression. In decision analysis, a decision tree can be used to visually and explicitly represent decisions and decision making. As the name goes, it uses a tree-like model of decisions. Though a commonly used tool in data mining for deriving a strategy to reach a particular goal, its also widely used in machine learning, which will be the main focus of this article.
+
 \end{abstract} 
 
-\subparagraph{Keywords.} \textit{Decision Tree, Normalization, Generalization, Preprocessing, Feature Engineering, Scikit-Learn, Pandas, Numpy, Python 3.5.}
+\subparagraph{Keywords.} \textit{}
 
-\section{Data Preprocessing}
-In this section, we'll be looking at our training data from different aspects. First, we need to get a quick intuition of how data looks like, how is that distributed and what to do with that! To do this, we'll be using some functions as described below.
+\section{Text Preprocessing}
+\subsection{Separating Train and Test Data}
+In the first step, we need to properly separate the train samples and their labels from each other. To achieve this, we have implemented the function \textit{extract labels} to does that for us. Columns are based on the current dataset which is called \textit{spam collection dataset}.
+
 \begin{python}
-	separate_output('Training Data Types')
-	print(train_data.dtypes)
+	def extract_labels(data):
+		return (dataset['v2'], data['v1'])
 \end{python}
-In this part, we have printed the data types of our training set. Note that \textit{separate-output} is a self-defined function to make thing more clear in the terminal.
-Now, its time for some statistics. To get a full understanding of how our numerical data is distributed, we use the following code.
-\begin{python}
-	separate_output('Statistical Information')
-	print(train_data.describe())
-\end{python}
-The result of this part of code will be some statistical parameters such as: \textit{variance, mean, max, min, counts}. These can be useful in the future to make decisions about \textit{data normalization}.
-Another amazing feature that \textit{Pandas} has provided for us is the ability to separately describe each column in the dataset. As an example, the first column contains $686$ missing values. Use the following code to believe this fact.
-\begin{python}
-	separate_output('Counts Values on a Column')
-	print(train_data['col_1'].value_counts())
-\end{python}
-This column may not be seem much useful at the first glance, but we keep it since there are some good values for that column which might make it useful while we go further in the classification task.
-Some of these columns are completely useless. Let's find them. The following function will return a dictionary consisting of number of missing values of each column.
-\begin{python}
-	def compute_nans(df):
+
+\subsection{Extracting Features of Texts}
+In this section, we'll be using \textit{Bag of Words} model from \textit{Scikit-learn} to to turn the text content into numerical feature vectors. This model does the following steps to turn texts into feature maps.
+\begin{enumerate}
+	\item Assign a fixed ID to every word occurring in any document (for instance by building a dictionary from words to integer indices).
 	
-	nans_dict = {}
-	
-	for col in df:
-		nan_col_counter = 0
-		for row in df[col]:
-			if(row == '?'):
-				nan_col_counter += 1
-		nans_dict[str(col)] = [nan_col_counter]
-	
-	return nans_dict
-\end{python}
-We can obviously remove the following columns with more than 500 missing values.
-\begin{python}
-	cols_to_drop = [key for key, value in nan_cols.items() if value > 500]
-	train_data = train_data.drop(cols_to_drop, axis=1)
-\end{python}
+	\item Each unique word in our dictionary will correspond to a feature (descriptive feature).
+\end{enumerate}
+Scikit-learn has a high level component which will create feature vectors for us \textit{CountVectorizer}.
+
 
 \begin{thebibliography}{999}
 	
