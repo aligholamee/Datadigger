@@ -19,7 +19,7 @@ train_data, train_labels = extract_labels(dataset)
 
 
 # Split train and test data
-train_data, test_data, train_labels, test_labels = train_test_split(train_data, train_labels, test_size=0.2)
+train_data, test_data, train_labels, test_labels = train_test_split(train_data, train_labels, test_size=0.1)
 
 # Extract features using Bag of Words model
 count_vect = CountVectorizer()
@@ -35,7 +35,10 @@ clf = MultinomialNB().fit(train_data, train_labels)
 test_data = count_vect.transform(test_data)
 test_data = tf_idf.transform(test_data)
 
-# Predict the future :)))s
+# Predict the future :)))
+predicted = clf.predict(test_data)
+
+print(predicted)
 
 
 
