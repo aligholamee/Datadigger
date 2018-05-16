@@ -211,8 +211,52 @@ In this section, we'll be using \textit{Bag of Words} model from \textit{Scikit-
 	\item Each unique word in our dictionary will correspond to a feature (descriptive feature).
 \end{enumerate}
 Scikit-learn has a high level component which will create feature vectors for us \textit{CountVectorizer}.
+\begin{python}
+	count_vect = CountVectorizer()
+	X_train = count_vect.fit_transform(train_data)
+\end{python}
+It worths mentioning that the parameters and return value of the \textit{fit\_transform} function is as follows:
+\begin{python}
+	Parameters
+	----------
+	raw_documents : iterable
+	An iterable which yields either str, unicode or file objects.
+	
+	Returns
+	-------
+	X : array, [n_samples, n_features]
+	Document-term matrix.
+\end{python}
 
+\subsection{Issue With Occurrences}
+Occurrence count is a good start but there is an issue: longer documents will have higher average count values than shorter documents, even though they might talk about the same topics.
 
+To avoid these potential discrepancies it suffices to \textbf{divide} the number of occurrences of each word in a document by the total \textbf{number of words in the document}. We'll delve into the formal representation of the \textit{TF-IDF}. It is a numerical statistic that is intended to reflect how important a word is to a document in a collection or corpus.
+\subsubsection{Term Frequency}
+We denote the raw count of a word in a document as $f_{t, d}$. It show the number of times that term \textit{t} has occurred in the document \textit{d}. There are also other approaches to denote the number of occurrences of a term in a document and they are trying to illustrate the weighted frequency of each term in a document. Some of them are:
+\begin{itemize}
+	\item Boolean Frequencies
+	\item Logarithmically Scaled Frequency
+	\item Augmented Frequencies
+\end{itemize}
+
+\subsubsection{Inverse Document Frequency}
+The inverse document frequency is a measure of how much information the word provides, that is, whether the term is common or rare across all documents. It is the logarithmically scaled inverse fraction of the documents that contain the word, obtained by dividing the total number of documents by the number of documents containing the term, and then taking the logarithm of that quotient.
+$$
+	idf(t, D) = \log \frac{N}{|\{d \epsilon D: t \epsilon d\}}
+$$
+Where N is the number of documents in the database D. The denominator illustrates the number of documents in which they include the term $t$.
+
+\subsubsection{TF-IDF}
+A high weight in tf–idf is reached by a high term frequency (in the given document) and a low document frequency of the term in the whole collection of documents.
+$$
+	tfidf(t, d, D) = tf(t, d) * idf(t, D)
+$$
+
+So far we have defined metrics that can be conducted to improve the features extracted from the emails in the first step. We'll change the transformer to use the \textit{tf-idf} metric to extract features. Using this approach will result in a more precise text classification. This will \textbf{normalize the frequency of redundant words}.
+\begin{python}
+	
+\end{python}
 \begin{thebibliography}{999}
 	
 	\bibitem{cross_validation}
