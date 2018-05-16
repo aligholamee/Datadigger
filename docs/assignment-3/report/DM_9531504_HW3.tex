@@ -255,6 +255,17 @@ $$
 
 So far we have defined metrics that can be conducted to improve the features extracted from the emails in the first step. We'll change the transformer to use the \textit{tf-idf} metric to extract features. Using this approach will result in a more precise text classification. This will \textbf{normalize the frequency of redundant words}.
 \begin{python}
+	count_vect = CountVectorizer()
+	X_train = count_vect.fit_transform(train_data)
+	
+	tf_idf = TfidfTransformer()
+	X_train = tf_idf.fit_transform(X_train)
+\end{python}
+
+\section{Text Classification}
+Now that we have our features, we can train a classifier to try to predict the category of a post as \textit{Spam} or \textit{Ham} (Not Spam). There are various algorithms which can be used for text classification. We will start with the most simplest one called Naive Bayes. For this task, we only need the two class Naive Bayes classifier.
+\begin{python}
+	clf = MultinomialNB().fit(train_data, train_labels)
 	
 \end{python}
 \begin{thebibliography}{999}
