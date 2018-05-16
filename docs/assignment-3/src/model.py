@@ -32,7 +32,10 @@ train_data = tf_idf.fit_transform(train_data)
 # Train the Naive Bayes classifier
 clf = MultinomialNB().fit(train_data, train_labels)
 
+test_data = count_vect.transform(test_data)
+test_data = tf_idf.transform(test_data)
 
+# Predict the future :)))s
 
 
 
