@@ -1,8 +1,9 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import recall_score, precision_score, accuracy_score
+from sklearn.metrics import recall_score, precision_score, accuracy_score, roc_curve, auc
 from sklearn import preprocessing
 
 DATA_ROOT = './data/'
@@ -45,10 +46,26 @@ print("Accuracy: ", accuracy_score(test_labels, predicted))
 lb = preprocessing.LabelBinarizer()
 predicted_binarized = lb.fit_transform(predicted)
 test_labels_binarized = lb.fit_transform(test_labels)
+
+# Plot the ROC curve
+fpr, tpr, thresholds = roc_curve(test_labels_binarized, predicted_binarized)
+auc = auc(fpr, tpr)
+print('auc =', auc)
+
 print("Recall: ", recall_score(test_labels_binarized, predicted_binarized))
 print("Precision: ", precision_score(test_labels_binarized, predicted_binarized))
 
-
+plt.figure()
+plt.title('Receiver Operating Characteristic')
+plt.plot(fpr, tpr, 'b',
+label='AUC = %0.2f'% auc)
+plt.legend(loc='lower right')
+plt.plot([0,1],[0,1],'r--')
+plt.xlim([-0.1,1.2])
+plt.ylim([-0.1,1.2])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+plt.show()
 
 
 
