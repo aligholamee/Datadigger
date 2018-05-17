@@ -57,8 +57,7 @@ print("Precision: ", precision_score(test_labels_binarized, predicted_binarized)
 
 plt.figure()
 plt.title('Receiver Operating Characteristic')
-plt.plot(fpr, tpr, 'b',
-label='AUC = %0.2f'% auc)
+plt.plot(fpr, tpr, 'b', label='AUC = %0.2f'% auc)
 plt.legend(loc='lower right')
 plt.plot([0,1],[0,1],'r--')
 plt.xlim([-0.1,1.2])
