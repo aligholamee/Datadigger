@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.24)  17 MAY 2018 13:35
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.24)  17 MAY 2018 13:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1495,36 +1495,36 @@ Package xcolor Warning: Incompatible color definition on input line 217.
 
 Package xcolor Warning: Incompatible color definition on input line 217.
 
-
-Package xcolor Warning: Incompatible color definition on input line 219.
-
-
-Package xcolor Warning: Incompatible color definition on input line 219.
-
-
-Package xcolor Warning: Incompatible color definition on input line 219.
-
-
-Package xcolor Warning: Incompatible color definition on input line 219.
-
-
-Package xcolor Warning: Incompatible color definition on input line 219.
-
-
-Package xcolor Warning: Incompatible color definition on input line 223.
-
-
-Package xcolor Warning: Incompatible color definition on input line 223.
-
-
-Package xcolor Warning: Incompatible color definition on input line 223.
-
-
-Package xcolor Warning: Incompatible color definition on input line 223.
-
 [1
 
 ]
+
+Package xcolor Warning: Incompatible color definition on input line 219.
+
+
+Package xcolor Warning: Incompatible color definition on input line 219.
+
+
+Package xcolor Warning: Incompatible color definition on input line 219.
+
+
+Package xcolor Warning: Incompatible color definition on input line 219.
+
+
+Package xcolor Warning: Incompatible color definition on input line 219.
+
+
+Package xcolor Warning: Incompatible color definition on input line 223.
+
+
+Package xcolor Warning: Incompatible color definition on input line 223.
+
+
+Package xcolor Warning: Incompatible color definition on input line 223.
+
+
+Package xcolor Warning: Incompatible color definition on input line 223.
+
 
 Package xcolor Warning: Incompatible color definition on input line 229.
 
@@ -1649,53 +1649,47 @@ Package xcolor Warning: Incompatible color definition on input line 280.
 
 Package xcolor Warning: Incompatible color definition on input line 280.
 
-
-Package xcolor Warning: Incompatible color definition on input line 282.
-
-
-Package xcolor Warning: Incompatible color definition on input line 282.
-
-
-Package xcolor Warning: Incompatible color definition on input line 282.
-
-
-Package xcolor Warning: Incompatible color definition on input line 282.
-
-
-Package xcolor Warning: Incompatible color definition on input line 282.
-
-
-Package xcolor Warning: Incompatible color definition on input line 286.
-
-
-Package xcolor Warning: Incompatible color definition on input line 286.
-
 [3]
+
+Package xcolor Warning: Incompatible color definition on input line 282.
+
+
+Package xcolor Warning: Incompatible color definition on input line 282.
+
+
+Package xcolor Warning: Incompatible color definition on input line 282.
+
+
+Package xcolor Warning: Incompatible color definition on input line 282.
+
+
+Package xcolor Warning: Incompatible color definition on input line 282.
+
+
+Package xcolor Warning: Incompatible color definition on input line 286.
+
+
+Package xcolor Warning: Incompatible color definition on input line 286.
+
 File: 2_1.png Graphic file (type QTm)
- <use  "2_1.png" >
+<use  "2_1.png" >
 File: 2_2.png Graphic file (type QTm)
  <use  "2_2.png" >
 File: 2_3.png Graphic file (type QTm)
- <use  "2_3.png" >
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[4]
+ <use  "2_3.png" > [4]
 File: 2_4.png Graphic file (type QTm)
  <use  "2_4.png" >
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 File: 2_5.png Graphic file (type QTm)
-<use  "2_5.png" >
+<use  "2_5.png" > [5]
+File: 2_6.png Graphic file (type QTm)
+ <use  "2_6.png" >
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-File: 2_6.png Graphic file (type QTm)
-<use  "2_6.png" > [5] [6] [7] [8]
+[6] [7] [8]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 405.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 405.
  (./DM_9531504_HW3.aux)
@@ -1711,10 +1705,10 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 405.
 Here is how much of TeX's memory you used:
  32212 strings out of 493005
  622016 string characters out of 6137956
- 691246 words of memory out of 5000000
+ 689246 words of memory out of 5000000
  35710 multiletter control sequences out of 15000+600000
  12795 words of font info for 61 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 55i,8n,79p,10472b,1775s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,8n,79p,10472b,1202s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on DM_9531504_HW3.pdf (8 pages).
