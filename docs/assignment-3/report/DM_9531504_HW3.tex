@@ -266,14 +266,17 @@ So far we have defined metrics that can be conducted to improve the features ext
 Now that we have our features, we can train a classifier to try to predict the category of a post as \textit{Spam} or \textit{Ham} (Not Spam). There are various algorithms which can be used for text classification. We will start with the most simplest one called Naive Bayes. For this task, we only need the two class Naive Bayes classifier. We have also included the testing section of the code. The result will be available in the \textit{predict} variable.
 \begin{python}
 	clf = MultinomialNB().fit(train_data, train_labels)
-	
 	test_data = count_vect.transform(test_data)
 	test_data = tf_idf.transform(test_data)
-	
-	# Predict the future :)))
-	predicted = clf.predict(test_data)
-	
-	print(predicted)
+	print("Accuracy: ", accuracy_score(test_labels, predicted))
+\end{python}
+In order to use \textit{Recall} and \textit{Precision} metrics of Scikit-learn, we have to convert the labels into binary format. We'll use \textit{Label Binarizer} to achieve this.
+\begin{python}
+	lb = preprocessing.LabelBinarizer()
+	predicted_binarized = lb.fit_transform(predicted)
+	test_labels_binarized = lb.fit_transform(test_labels)
+	print("Recall: ", recall_score(test_labels_binarized, predicted_binarized))
+	print("Precision: ", precision_score(test_labels_binarized, predicted_binarized))
 \end{python}
 \begin{thebibliography}{999}
 	

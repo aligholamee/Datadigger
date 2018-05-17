@@ -2,6 +2,8 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import recall_score, precision_score, accuracy_score
+from sklearn import preprocessing
 
 DATA_ROOT = './data/'
 
@@ -37,8 +39,14 @@ test_data = tf_idf.transform(test_data)
 
 # Predict the future :)))
 predicted = clf.predict(test_data)
+print("Accuracy: ", accuracy_score(test_labels, predicted))
 
-print(predicted)
+# Labels need to be binarized
+lb = preprocessing.LabelBinarizer()
+predicted_binarized = lb.fit_transform(predicted)
+test_labels_binarized = lb.fit_transform(test_labels)
+print("Recall: ", recall_score(test_labels_binarized, predicted_binarized))
+print("Precision: ", precision_score(test_labels_binarized, predicted_binarized))
 
 
 
